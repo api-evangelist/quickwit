@@ -43,7 +43,7 @@ apis:
       - type: Documentation
         url: https://quickwit.io/docs/reference/rest-api
       - type: OpenAPI
-        url: https://quickwit.io/docs/reference/rest-api
+        url: https://raw.githubusercontent.com/api-evangelist/quickwit/refs/heads/main/openapi/openapi.yml
 common:
   - type: Website
     url: https://quickwit.io/

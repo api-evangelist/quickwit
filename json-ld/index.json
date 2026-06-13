@@ -1,0 +1,105 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "apievangelist": "https://apievangelist.com/schema/"
+  },
+  "@type": "SoftwareApplication",
+  "@id": "https://quickwit.io/",
+  "name": "Quickwit",
+  "description": "Cloud-native search engine for log management and full-text search with a REST API for indexing documents, running queries, and managing search indexes at petabyte scale.",
+  "url": "https://quickwit.io/",
+  "applicationCategory": "Search Engine",
+  "applicationSubCategory": [
+    "Log Management",
+    "Observability",
+    "Full-Text Search",
+    "Distributed Tracing",
+    "Analytics"
+  ],
+  "operatingSystem": "Linux, macOS",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "programmingLanguage": "Rust",
+  "isAccessibleForFree": true,
+  "codeRepository": "https://github.com/quickwit-oss/quickwit",
+  "provider": {
+    "@type": "Organization",
+    "name": "Quickwit, Inc.",
+    "url": "https://quickwit.io/",
+    "email": "hello@quickwit.io",
+    "sameAs": [
+      "https://github.com/quickwit-oss",
+      "https://www.linkedin.com/company/quickwit-inc/",
+      "https://twitter.com/quickwit_inc"
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Datadog",
+      "url": "https://www.datadoghq.com/"
+    }
+  },
+  "featureList": [
+    "Full-text search",
+    "Aggregation queries",
+    "NDJSON document ingestion",
+    "Index management",
+    "Data source connectors (Kafka, Kinesis, Pulsar)",
+    "Document deletion by query",
+    "OpenTelemetry support",
+    "Jaeger tracing compatibility",
+    "Elasticsearch-compatible API",
+    "Cloud object storage (S3, GCS, Azure Blob)",
+    "Petabyte-scale search",
+    "Sub-second query latency",
+    "Cluster management",
+    "Index templates"
+  ],
+  "documentation": {
+    "@type": "TechArticle",
+    "url": "https://quickwit.io/docs",
+    "name": "Quickwit Documentation"
+  },
+  "hasPart": [
+    {
+      "@type": "WebAPI",
+      "@id": "https://quickwit.io/docs/reference/rest-api",
+      "name": "Quickwit REST API",
+      "description": "REST API for indexing, searching, and managing Quickwit indexes",
+      "documentation": "https://quickwit.io/docs/reference/rest-api",
+      "termsOfService": "https://quickwit.io/",
+      "version": "v1",
+      "hydra:apiDocumentation": "/openapi.json",
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "http://localhost:7280/api/v1",
+        "description": "Default local Quickwit node endpoint"
+      },
+      "apievangelist:tags": [
+        "Search",
+        "Indexing",
+        "Log Management",
+        "Observability"
+      ]
+    }
+  ],
+  "releaseNotes": "https://github.com/quickwit-oss/quickwit/blob/main/CHANGELOG.md",
+  "softwareVersion": "0.8.2",
+  "dateModified": "2026-06-13",
+  "keywords": [
+    "search engine",
+    "log management",
+    "observability",
+    "full-text search",
+    "cloud native",
+    "open source",
+    "distributed tracing",
+    "analytics",
+    "rust",
+    "elasticsearch compatible"
+  ],
+  "sameAs": [
+    "https://github.com/quickwit-oss/quickwit",
+    "https://discord.gg/MT27AG5EVE",
+    "https://www.youtube.com/@quickwit8103"
+  ]
+}
