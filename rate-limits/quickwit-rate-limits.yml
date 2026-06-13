@@ -1,0 +1,49 @@
+name: Quickwit Rate Limits
+description: Quickwit is a self-hosted, open-source search engine. There are no externally-enforced SaaS rate limits. Throughput is bounded by the hardware resources of the deployment. The following limits are either hardcoded in the software or configurable by operators.
+url: https://quickwit.io/docs/reference/rest-api
+limits:
+  - name: Ingest Payload Size
+    scope: Per HTTP request to the ingest endpoint
+    limit: 10 MB
+    unit: bytes
+    type: hard
+    description: >
+      A single POST to api/v1/<index_id>/ingest may not exceed 10 MB of
+      NDJSON content. Split large batches into multiple requests.
+    source: https://quickwit.io/docs/reference/rest-api
+  - name: Search Default Hit Count
+    scope: Per search request
+    limit: 20
+    unit: documents
+    type: default
+    description: >
+      The max_hits parameter defaults to 20 results per search request.
+      Callers may increase this value up to the limits of available memory
+      and configured cluster resources.
+    source: https://quickwit.io/docs/reference/rest-api
+  - name: API Concurrency
+    scope: Cluster-wide
+    limit: operator-configured
+    unit: concurrent requests
+    type: configurable
+    description: >
+      Concurrent request handling is governed by the number of searcher
+      nodes and their CPU/memory resources. Quickwit uses a stateless
+      searcher architecture, allowing horizontal scaling to meet demand.
+    source: https://quickwit.io/docs/overview/architecture
+  - name: Ingest Commit Modes
+    scope: Per ingest request
+    limit: 3 modes
+    unit: modes
+    type: configurable
+    description: >
+      The ?commit= query parameter on the ingest endpoint controls write
+      durability: "auto" (default, background), "wait_for" (wait for
+      indexing pipeline acknowledgment), or "force" (synchronous commit).
+      Choosing "force" increases latency and may reduce throughput.
+    source: https://quickwit.io/docs/reference/rest-api
+notes: >
+  Because Quickwit is self-hosted open-source software, operators are
+  responsible for capacity planning and may configure additional limits
+  (e.g., nginx/reverse-proxy rate limiting) in front of the REST API.
+  No API-key-based rate limit tiers exist.

@@ -1,0 +1,54 @@
+name: Quickwit FinOps
+description: Cost and financial operations considerations for running Quickwit, a cloud-native open-source search engine designed to minimize infrastructure spend by decoupling compute from storage.
+url: https://quickwit.io/
+cost_model:
+  type: self-hosted open source
+  license: Apache 2.0
+  software_cost: 0
+  primary_cost_drivers:
+    - name: Object Storage
+      description: >
+        Quickwit stores indexes on cloud object storage (Amazon S3, Google Cloud
+        Storage, Azure Blob Storage). Storage costs are determined by the cloud
+        provider's object-storage pricing and the total compressed index size.
+        Because Quickwit uses columnar compression, index storage is typically a
+        small fraction of raw log volume.
+      typical_unit: GB/month
+      examples:
+        - provider: Amazon S3
+          cost_per_gb_month: ~0.023 USD (standard tier, us-east-1)
+        - provider: Google Cloud Storage
+          cost_per_gb_month: ~0.020 USD (standard tier)
+    - name: Compute (Indexers and Searchers)
+      description: >
+        Quickwit separates indexing and searching into stateless worker roles.
+        Indexers can be scaled down or stopped when ingestion is idle, and
+        searchers handle query traffic on demand. Users pay only for the
+        compute instances they provision (EC2, GKE nodes, bare metal, etc.).
+      typical_unit: vCPU-hour
+    - name: Data Transfer / Egress
+      description: >
+        Queries pull index data from object storage into searcher memory.
+        Cloud providers charge for data transfer between storage and compute
+        in certain configurations. Keeping searchers co-located with the
+        storage bucket's region minimizes egress fees.
+      typical_unit: GB transferred
+cost_optimization:
+  - tip: Use object-storage tiering (e.g., S3 Intelligent-Tiering) for cold index data.
+  - tip: Scale indexer nodes to zero during off-peak hours; Quickwit's stateless design supports this.
+  - tip: Tune retention policies to automatically delete old splits and reclaim storage costs.
+  - tip: Leverage Quickwit's schemaless compression to reduce stored index size versus Elasticsearch.
+  - tip: Run Quickwit on spot or preemptible instances for indexer workloads to cut compute costs significantly.
+  - tip: Use the "auto" commit mode for ingest to batch writes efficiently, reducing API overhead.
+references:
+  - title: Quickwit Architecture (decoupled compute/storage)
+    url: https://quickwit.io/docs/overview/architecture
+  - title: How Binance built a 100PB log service with Quickwit
+    url: https://quickwit.io/blog/binance-one-hundred-pb-log-service
+  - title: Quickwit Kubernetes Helm Deployment
+    url: https://quickwit.io/docs/deployment/kubernetes/helm
+notes: >
+  Quickwit joined Datadog in January 2025. The open-source codebase remains
+  active under Apache 2.0. For enterprises requiring a managed service with
+  predictable cost, third-party managed hosting (e.g., Elestio) is available
+  at a per-node fee. Contact Datadog for enterprise pricing inquiries.

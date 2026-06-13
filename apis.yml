@@ -1,0 +1,76 @@
+aid: quickwit
+name: Quickwit
+description: >
+  Cloud-native search engine for log management and full-text search with a
+  REST API for indexing documents, running queries, and managing search indexes
+  at petabyte scale. Quickwit decouples compute from storage, enabling
+  sub-second search and analytics directly on cloud object storage (S3, GCS,
+  Azure Blob). It is open-source (Apache 2.0), written in Rust, and supports
+  OpenTelemetry, Jaeger tracing, and an Elasticsearch-compatible API.
+  Quickwit joined Datadog in January 2025.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/quickwit/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Search
+  - Log Management
+  - Observability
+  - Full-Text Search
+  - Cloud Native
+  - Open Source
+  - Distributed Tracing
+  - Analytics
+apis:
+  - aid: quickwit:quickwit-rest-api
+    name: Quickwit REST API
+    description: >
+      The Quickwit REST API provides endpoints for indexing NDJSON documents,
+      executing full-text and aggregation search queries, managing indexes and
+      data sources, streaming field values, deleting documents by query, and
+      monitoring cluster health. An OpenAPI specification is served at
+      /openapi.json and a Swagger UI at /swagger-ui on any running Quickwit node.
+    humanURL: https://quickwit.io/docs/reference/rest-api
+    baseURL: https://your-quickwit-node/api/v1
+    tags:
+      - Search
+      - Indexing
+      - Log Management
+      - Observability
+    properties:
+      - type: Documentation
+        url: https://quickwit.io/docs/reference/rest-api
+      - type: OpenAPI
+        url: https://quickwit.io/docs/reference/rest-api
+common:
+  - type: Website
+    url: https://quickwit.io/
+  - type: Documentation
+    url: https://quickwit.io/docs
+  - type: GitHubOrg
+    url: https://github.com/quickwit-oss
+  - type: GitHubRepository
+    url: https://github.com/quickwit-oss/quickwit
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/quickwit-inc/
+  - type: Blog
+    url: https://quickwit.io/blog
+  - type: X
+    url: https://twitter.com/quickwit_inc
+  - type: Discord
+    url: https://discord.gg/MT27AG5EVE
+  - type: YouTube
+    url: https://www.youtube.com/@quickwit8103
+  - type: Pricing
+    url: https://quickwit.io/
+  - type: Plans
+    url: plans/quickwit-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/quickwit-rate-limits.yml
+  - type: FinOps
+    url: finops/quickwit-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

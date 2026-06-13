@@ -1,0 +1,34 @@
+name: Quickwit Plans and Pricing
+description: Quickwit is an open-source, cloud-native search engine released under the Apache 2.0 license. The core software is free to self-host. In January 2025, Quickwit was acquired by Datadog; no separate commercial SaaS pricing tiers are publicly listed by Quickwit itself.
+url: https://quickwit.io/
+plans:
+  - name: Open Source (Self-Hosted)
+    description: Full-featured community edition available on GitHub under the Apache 2.0 license. Deployable on-premise, on Kubernetes via Helm, or on any major cloud provider. No seat limits, no feature gates.
+    type: free
+    pricing:
+      unit: self-hosted
+      amount: 0
+      currency: USD
+      period: month
+    features:
+      - Sub-second search and analytics on cloud object storage (S3, GCS, Azure Blob)
+      - Schemaless NDJSON document ingestion
+      - REST API with Swagger UI and OpenAPI spec at /openapi.json
+      - Elasticsearch-compatible search API
+      - Index, Source, Search, Delete, and Cluster management APIs
+      - OpenTelemetry and Jaeger native tracing support
+      - Kafka and Kinesis source connectors
+      - Grafana data-source plugin
+      - Kubernetes / Helm deployment support
+      - Multi-tenancy with retention and lifecycle policies
+      - GDPR-compliant document deletion
+      - High availability and horizontal scalability
+    limitations:
+      - No managed cloud offering from Quickwit
+      - Support is community-based (Discord, GitHub Issues)
+      - Enterprise SLA requires third-party managed hosting (e.g., Elestio)
+notes: >
+  Quickwit joined Datadog in January 2025. The open-source repository
+  (quickwit-oss/quickwit) continues to receive releases under Apache 2.0.
+  For managed hosting, third-party providers such as Elestio offer paid plans.
+  Contact Datadog for enterprise licensing inquiries.
