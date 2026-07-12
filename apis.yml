@@ -45,6 +45,8 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/quickwit/refs/heads/main/openapi/openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/quickwit-domain-security.yml
   - type: Website
     url: https://quickwit.io/
   - type: Documentation
