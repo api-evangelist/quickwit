@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Cluster
+  description: Monitor cluster state and node health
+paths:
+  /health/livez:
+    get:
+      operationId: livenessCheck
+      summary: Liveness check
+      description: Returns 200 if the node is alive.
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: Node is alive
+  /health/readyz:
+    get:
+      operationId: readinessCheck
+      summary: Readiness check
+      description: Returns 200 if the node is ready to serve requests.
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: Node is ready
+  /cluster:
+    get:
+      operationId: getCluster
+      summary: Get cluster state
+      description: Returns the current state of the Quickwit cluster including all node information.
+      tags:
+      - Cluster
+      parameters:
+      - name: format
+        in: query
+        description: Output format
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - pretty_json
+          default: pretty_json
+      responses:
+        '200':
+          description: Cluster state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterState'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  schemas:
+    ClusterState:
+      type: object
+      properties:
+        cluster_id:
+          type: string
+          description: Unique identifier for the cluster
+        node_id:
+          type: string
+          description: ID of the node serving the request
+        num_live_nodes:
+          type: integer
+          description: Number of live nodes in the cluster
+        live_nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              node_id:
+                type: string
+              listen_addr:
+                type: string
+              indexer_cpu_capacity:
+                type: number
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found

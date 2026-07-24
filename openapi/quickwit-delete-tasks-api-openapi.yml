@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster Delete Tasks API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Delete Tasks
+  description: Remove documents matching queries from indexes
+paths:
+  /indexes/{index_id}/delete-tasks:
+    get:
+      operationId: listDeleteTasks
+      summary: List delete tasks
+      description: Returns all delete tasks for a given index.
+      tags:
+      - Delete Tasks
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      responses:
+        '200':
+          description: List of delete tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeleteTask'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createDeleteTask
+      summary: Create a delete task
+      description: Creates a task to delete all documents matching a query from an index.
+      tags:
+      - Delete Tasks
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteQuery'
+      responses:
+        '200':
+          description: Delete task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    DeleteQuery:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Query matching documents to delete
+          example: level:debug
+        search_field:
+          type: array
+          items:
+            type: string
+          description: Fields to search in
+        start_timestamp:
+          type: integer
+          format: int64
+          description: Minimum timestamp in seconds
+        end_timestamp:
+          type: integer
+          format: int64
+          description: Maximum timestamp in seconds
+    DeleteTask:
+      type: object
+      properties:
+        create_timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp when the task was created
+        opstamp:
+          type: integer
+          format: int64
+          description: Operation stamp for ordering
+        delete_query:
+          $ref: '#/components/schemas/DeleteQuery'
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index

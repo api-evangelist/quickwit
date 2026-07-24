@@ -1,0 +1,279 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster Index Templates API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Index Templates
+  description: Manage index templates for automatic index creation
+paths:
+  /templates:
+    get:
+      operationId: listIndexTemplates
+      summary: List index templates
+      description: Returns all index templates.
+      tags:
+      - Index Templates
+      responses:
+        '200':
+          description: List of index templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndexTemplate'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createIndexTemplate
+      summary: Create an index template
+      description: Creates a new index template used to auto-configure new indexes.
+      tags:
+      - Index Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexTemplate'
+          application/yaml:
+            schema:
+              $ref: '#/components/schemas/IndexTemplate'
+      responses:
+        '200':
+          description: Template created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /templates/{template_id}:
+    get:
+      operationId: getIndexTemplate
+      summary: Get an index template
+      description: Returns a specific index template.
+      tags:
+      - Index Templates
+      parameters:
+      - $ref: '#/components/parameters/templateId'
+      responses:
+        '200':
+          description: Index template
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexTemplate'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    put:
+      operationId: updateIndexTemplate
+      summary: Update an index template
+      description: Updates an existing index template.
+      tags:
+      - Index Templates
+      parameters:
+      - $ref: '#/components/parameters/templateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexTemplate'
+          application/yaml:
+            schema:
+              $ref: '#/components/schemas/IndexTemplate'
+      responses:
+        '200':
+          description: Template updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      operationId: deleteIndexTemplate
+      summary: Delete an index template
+      description: Deletes an index template.
+      tags:
+      - Index Templates
+      parameters:
+      - $ref: '#/components/parameters/templateId'
+      responses:
+        '200':
+          description: Template deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  parameters:
+    templateId:
+      name: template_id
+      in: path
+      description: The index template identifier
+      required: true
+      schema:
+        type: string
+      example: my-template
+  schemas:
+    IndexTemplate:
+      type: object
+      required:
+      - version
+      - template_id
+      - index_id_patterns
+      properties:
+        version:
+          type: string
+          description: Template format version
+        template_id:
+          type: string
+          description: Unique template identifier
+        index_id_patterns:
+          type: array
+          items:
+            type: string
+          description: Glob patterns matching index IDs this template applies to
+        priority:
+          type: integer
+          description: Priority when multiple templates match (higher wins)
+          default: 0
+        description:
+          type: string
+          description: Human-readable template description
+        doc_mapping:
+          $ref: '#/components/schemas/DocMapping'
+        indexing_settings:
+          $ref: '#/components/schemas/IndexingSettings'
+        search_settings:
+          $ref: '#/components/schemas/SearchSettings'
+        retention:
+          $ref: '#/components/schemas/RetentionPolicy'
+    RetentionPolicy:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Retention period (e.g. "90 days")
+        schedule:
+          type: string
+          description: Cron schedule for retention enforcement
+    SearchSettings:
+      type: object
+      properties:
+        default_search_fields:
+          type: array
+          items:
+            type: string
+          description: Fields searched when no field is specified in the query
+    IndexingSettings:
+      type: object
+      properties:
+        commit_timeout_secs:
+          type: integer
+          description: Maximum time before committing a split (seconds)
+        split_num_docs_target:
+          type: integer
+          description: Target number of docs per split
+        merge_policy:
+          type: object
+          description: Merge policy configuration
+        resources:
+          type: object
+          description: Resource limits for indexing
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+    DocMapping:
+      type: object
+      properties:
+        field_mappings:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+                enum:
+                - text
+                - u64
+                - i64
+                - f64
+                - bool
+                - datetime
+                - json
+                - bytes
+                - ip
+              fast:
+                type: boolean
+              indexed:
+                type: boolean
+              stored:
+                type: boolean
+        timestamp_field:
+          type: string
+          description: Field used as the document timestamp
+        tag_fields:
+          type: array
+          items:
+            type: string
+        store_source:
+          type: boolean
+          description: Whether to store the original source document
+        dynamic_mapping:
+          type: object
+          description: Configuration for dynamic field mapping
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'

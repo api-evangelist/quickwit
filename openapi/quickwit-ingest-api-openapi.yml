@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster Ingest API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Ingest
+  description: Add documents to indexes via NDJSON format
+paths:
+  /indexes/{index_id}/ingest:
+    post:
+      operationId: ingestDocuments
+      summary: Ingest documents
+      description: 'Ingests NDJSON documents into an index. Each line in the request body must be a valid JSON object. The commit parameter controls when the documents become searchable.
+
+        '
+      tags:
+      - Ingest
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - name: commit
+        in: query
+        description: 'Controls when documents become searchable. ''auto'' lets Quickwit decide, ''wait_for'' waits for next commit, ''force'' triggers an immediate commit.
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - auto
+          - wait_for
+          - force
+          default: auto
+      - name: detailed_response
+        in: query
+        description: Include parse_failures in the response
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        required: true
+        content:
+          application/x-ndjson:
+            schema:
+              type: string
+              description: NDJSON formatted documents, one per line
+            example: '{"message": "log line 1", "timestamp": 1700000000}
+
+              {"message": "log line 2", "timestamp": 1700000001}
+
+              '
+      responses:
+        '200':
+          description: Documents ingested successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index
+  schemas:
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+    IngestResponse:
+      type: object
+      properties:
+        num_docs_for_processing:
+          type: integer
+          description: Number of documents submitted for processing
+        num_ingested_docs:
+          type: integer
+          description: Number of documents successfully ingested
+        num_rejected_docs:
+          type: integer
+          description: Number of documents rejected due to parse errors
+        parse_failures:
+          type: array
+          items:
+            type: object
+            properties:
+              reason:
+                type: string
+              document:
+                type: string
+          description: Details of parse failures (only if detailed_response=true)

@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster Sources API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Sources
+  description: Configure data sources such as Kafka, Kinesis, and Pulsar
+paths:
+  /indexes/{index_id}/sources:
+    post:
+      operationId: createSource
+      summary: Create a source
+      description: Creates a new data source for an index.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceConfig'
+      responses:
+        '200':
+          description: Source created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConfig'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /indexes/{index_id}/sources/{source_id}:
+    put:
+      operationId: updateSource
+      summary: Update a source
+      description: Updates an existing data source configuration.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - $ref: '#/components/parameters/sourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceConfig'
+      responses:
+        '200':
+          description: Source updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConfig'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      operationId: deleteSource
+      summary: Delete a source
+      description: Deletes a data source from an index.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - $ref: '#/components/parameters/sourceId'
+      responses:
+        '200':
+          description: Source deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /indexes/{index_id}/sources/{source_id}/toggle:
+    put:
+      operationId: toggleSource
+      summary: Toggle a source
+      description: Enables or disables a data source.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - $ref: '#/components/parameters/sourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - enable
+              properties:
+                enable:
+                  type: boolean
+                  description: Set to true to enable, false to disable
+      responses:
+        '200':
+          description: Source toggled successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /indexes/{index_id}/sources/{source_id}/reset-checkpoint:
+    put:
+      operationId: resetSourceCheckpoint
+      summary: Reset source checkpoint
+      description: Resets the checkpoint for a data source, causing it to re-read from the beginning.
+      tags:
+      - Sources
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - $ref: '#/components/parameters/sourceId'
+      responses:
+        '200':
+          description: Source checkpoint reset successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  parameters:
+    sourceId:
+      name: source_id
+      in: path
+      description: The source identifier
+      required: true
+      schema:
+        type: string
+      example: my-kafka-source
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  schemas:
+    SourceConfig:
+      type: object
+      required:
+      - version
+      - source_id
+      - source_type
+      - params
+      properties:
+        version:
+          type: string
+          description: Configuration format version
+        source_id:
+          type: string
+          description: Unique source identifier
+          example: my-kafka-source
+        source_type:
+          type: string
+          enum:
+          - kafka
+          - kinesis
+          - pulsar
+          - file
+          - vec
+          - void
+          - ingest-v2
+          description: Type of data source
+        num_pipelines:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Number of indexing pipelines per node
+        transform:
+          type: object
+          nullable: true
+          description: VRL transformation applied to documents before indexing
+          properties:
+            vrl_script:
+              type: string
+              description: VRL script content
+            timezone:
+              type: string
+              default: UTC
+        params:
+          type: object
+          description: Source-specific parameters
+          additionalProperties: true
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found

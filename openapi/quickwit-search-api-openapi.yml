@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: Quickwit REST Cluster Search API
+  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
+
+    '
+  version: 0.8.2
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  contact:
+    name: Quickwit, Inc.
+    email: hello@quickwit.io
+  x-api-evangelist-rating:
+    designScore: 70
+    reliability: 80
+    documentation: 75
+servers:
+- url: http://localhost:7280/api/v1
+  description: Local Quickwit node
+tags:
+- name: Search
+  description: Query documents across indexes using full-text and aggregation queries
+paths:
+  /indexes/{index_id}/search:
+    get:
+      operationId: searchIndexGet
+      summary: Search an index (GET)
+      description: Executes a search query against a specific index using GET parameters.
+      tags:
+      - Search
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/startTimestamp'
+      - $ref: '#/components/parameters/endTimestamp'
+      - $ref: '#/components/parameters/startOffset'
+      - $ref: '#/components/parameters/maxHits'
+      - $ref: '#/components/parameters/searchField'
+      - $ref: '#/components/parameters/snippetFields'
+      - $ref: '#/components/parameters/sortBy'
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: searchIndexPost
+      summary: Search an index (POST)
+      description: Executes a search query against a specific index using a JSON request body.
+      tags:
+      - Search
+      parameters:
+      - $ref: '#/components/parameters/indexId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  parameters:
+    query:
+      name: query
+      in: query
+      description: Full-text search query string
+      required: true
+      schema:
+        type: string
+      example: error AND severity:high
+    searchField:
+      name: search_field
+      in: query
+      description: Comma-separated list of fields to search in
+      required: false
+      schema:
+        type: string
+    maxHits:
+      name: max_hits
+      in: query
+      description: Maximum number of hits to return
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 20
+    snippetFields:
+      name: snippet_fields
+      in: query
+      description: Comma-separated list of fields to extract snippets from
+      required: false
+      schema:
+        type: string
+    format:
+      name: format
+      in: query
+      description: Output format
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - pretty_json
+        default: pretty_json
+    sortBy:
+      name: sort_by
+      in: query
+      description: Sort field(s). Prefix with - for descending order.
+      required: false
+      schema:
+        type: string
+    endTimestamp:
+      name: end_timestamp
+      in: query
+      description: Maximum timestamp filter in seconds (exclusive)
+      required: false
+      schema:
+        type: integer
+        format: int64
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index
+    startOffset:
+      name: start_offset
+      in: query
+      description: Number of documents to skip
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    startTimestamp:
+      name: start_timestamp
+      in: query
+      description: Minimum timestamp filter in seconds (inclusive)
+      required: false
+      schema:
+        type: integer
+        format: int64
+  schemas:
+    SearchRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Full-text search query
+          example: error AND service:api
+        start_timestamp:
+          type: integer
+          format: int64
+          description: Minimum timestamp in seconds (inclusive)
+        end_timestamp:
+          type: integer
+          format: int64
+          description: Maximum timestamp in seconds (exclusive)
+        start_offset:
+          type: integer
+          minimum: 0
+          default: 0
+          description: Number of documents to skip
+        max_hits:
+          type: integer
+          minimum: 0
+          default: 20
+          description: Maximum number of hits to return
+        search_field:
+          type: array
+          items:
+            type: string
+          description: Fields to search in
+        snippet_fields:
+          type: array
+          items:
+            type: string
+          description: Fields to extract snippets from
+        sort_by:
+          type: array
+          items:
+            type: string
+          description: Fields to sort by (prefix with - for descending)
+        aggs:
+          type: object
+          description: Elasticsearch-compatible aggregation definitions
+          additionalProperties: true
+        format:
+          type: string
+          enum:
+          - json
+          - pretty_json
+          default: pretty_json
+    SearchResponse:
+      type: object
+      properties:
+        hits:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Array of matching documents
+        num_hits:
+          type: integer
+          format: int64
+          description: Total number of matching documents
+        elapsed_time_micros:
+          type: integer
+          format: int64
+          description: Query execution time in microseconds
+        errors:
+          type: array
+          items:
+            type: string
+          description: Non-fatal errors encountered during search
+        aggregations:
+          type: object
+          additionalProperties: true
+          description: Aggregation results
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
