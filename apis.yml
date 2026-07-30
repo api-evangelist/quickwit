@@ -9,7 +9,19 @@ description: >
   OpenTelemetry, Jaeger tracing, and an Elasticsearch-compatible API.
   Quickwit joined Datadog in January 2025.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/quickwit.png
 url: https://raw.githubusercontent.com/api-evangelist/quickwit/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -24,26 +36,90 @@ tags:
   - Distributed Tracing
   - Analytics
 apis:
-  - aid: quickwit:quickwit-rest-api
-    name: Quickwit REST API
-    description: >
-      The Quickwit REST API provides endpoints for indexing NDJSON documents,
-      executing full-text and aggregation search queries, managing indexes and
-      data sources, streaming field values, deleting documents by query, and
-      monitoring cluster health. An OpenAPI specification is served at
-      /openapi.json and a Swagger UI at /swagger-ui on any running Quickwit node.
-    humanURL: https://quickwit.io/docs/reference/rest-api
-    baseURL: https://your-quickwit-node/api/v1
-    tags:
-      - Search
-      - Indexing
-      - Log Management
-      - Observability
-    properties:
-      - type: Documentation
-        url: https://quickwit.io/docs/reference/rest-api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/quickwit/refs/heads/main/openapi/openapi.yml
+- aid: quickwit:quickwit-cluster-api
+  name: Quickwit Cluster API
+  description: Monitor cluster state and node health
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-delete-tasks-api
+  name: Quickwit Delete Tasks API
+  description: Remove documents matching queries from indexes
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Delete Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-delete-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-index-templates-api
+  name: Quickwit Index Templates API
+  description: Manage index templates for automatic index creation
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Index Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-index-templates-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-indexes-api
+  name: Quickwit Indexes API
+  description: Create, update, retrieve, and manage search indexes
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Indexes
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-indexes-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-ingest-api
+  name: Quickwit Ingest API
+  description: Add documents to indexes via NDJSON format
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Ingest
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-ingest-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-search-api
+  name: Quickwit Search API
+  description: Query documents across indexes using full-text and aggregation queries
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-search-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
+- aid: quickwit:quickwit-sources-api
+  name: Quickwit Sources API
+  description: Configure data sources such as Kafka, Kinesis, and Pulsar
+  humanURL: https://quickwit.io/docs/reference/rest-api
+  baseURL: https://your-quickwit-node/api/v1
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/quickwit-sources-api-openapi.yml
+  - type: Documentation
+    url: https://quickwit.io/docs/reference/rest-api
 common:
   - type: AgenticAccess
     url: agentic-access/quickwit-agentic-access.yml
