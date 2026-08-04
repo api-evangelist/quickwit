@@ -1,0 +1,26 @@
+{
+  "provider": "quickwit",
+  "sources": [
+    "quickwit-cluster-api-openapi.yml",
+    "quickwit-delete-tasks-api-openapi.yml",
+    "quickwit-index-templates-api-openapi.yml",
+    "quickwit-indexes-api-openapi.yml",
+    "quickwit-ingest-api-openapi.yml",
+    "quickwit-search-api-openapi.yml",
+    "quickwit-sources-api-openapi.yml"
+  ],
+  "outputs": [
+    "quickwit-cluster-api-openapi.yml",
+    "quickwit-delete-tasks-api-openapi.yml",
+    "quickwit-index-templates-api-openapi.yml",
+    "quickwit-indexes-api-openapi.yml",
+    "quickwit-ingest-api-openapi.yml",
+    "quickwit-search-api-openapi.yml",
+    "quickwit-sources-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
