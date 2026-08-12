@@ -121,6 +121,9 @@ apis:
   - type: Documentation
     url: https://quickwit.io/docs/reference/rest-api
 common:
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/quickwit-oss/quickwit/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/quickwit-agentic-access.yml
   - type: DomainSecurity
