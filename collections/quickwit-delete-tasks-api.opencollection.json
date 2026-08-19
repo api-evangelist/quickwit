@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Delete Tasks API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delete Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List delete tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/delete-tasks",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ]
+          },
+          "docs": "Returns all delete tasks for a given index."
+        },
+        {
+          "info": {
+            "name": "Create a delete task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/delete-tasks",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task to delete all documents matching a query from an index."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

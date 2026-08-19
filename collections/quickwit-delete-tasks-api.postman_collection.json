@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "93bc805d-9439-459b-b593-4c0f476269f0",
+      "name": "Delete Tasks",
+      "description": {
+        "content": "Remove documents matching queries from indexes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "883e4f32-17d6-460e-8fba-61c4ef616150",
+          "name": "List delete tasks",
+          "request": {
+            "name": "List delete tasks",
+            "description": {
+              "content": "Returns all delete tasks for a given index.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "delete-tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ac1adf6-e0a6-4250-9896-c84efbc39521",
+              "name": "List of delete tasks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"create_timestamp\": 7720,\n    \"opstamp\": 4873,\n    \"delete_query\": {\n      \"query\": \"level:debug\",\n      \"search_field\": [\n        \"string\",\n        \"string\"\n      ],\n      \"start_timestamp\": 6830,\n      \"end_timestamp\": 2772\n    }\n  },\n  {\n    \"create_timestamp\": 1183,\n    \"opstamp\": 1007,\n    \"delete_query\": {\n      \"query\": \"level:debug\",\n      \"search_field\": [\n        \"string\",\n        \"string\"\n      ],\n      \"start_timestamp\": 6322,\n      \"end_timestamp\": 9505\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf77496d-301d-48cc-b847-12eac2762e5e",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8485e8c-752f-42a8-a880-1fc25db123f5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb6d6488-eab3-4113-a605-e44f67f639c4",
+          "name": "Create a delete task",
+          "request": {
+            "name": "Create a delete task",
+            "description": {
+              "content": "Creates a task to delete all documents matching a query from an index.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "delete-tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83389b87-37fc-4f05-857c-6a4ed5391fee",
+              "name": "Delete task created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"level:debug\",\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"create_timestamp\": 8060,\n  \"opstamp\": 9868,\n  \"delete_query\": {\n    \"query\": \"level:debug\",\n    \"search_field\": [\n      \"string\",\n      \"string\"\n    ],\n    \"start_timestamp\": 5754,\n    \"end_timestamp\": 9406\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e8416c7-d9d6-46a4-84e3-9c44c20e0ab0",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"level:debug\",\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e6d9393-ac09-43f8-971e-1275457b4ba7",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"level:debug\",\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "739a1d80-7e21-4c76-989e-069196d4a6cb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "delete-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"level:debug\",\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b22dab2f-9807-4726-8398-a41825f5e95e",
+    "name": "Quickwit REST Cluster Delete Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}

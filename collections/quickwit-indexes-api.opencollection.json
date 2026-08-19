@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Indexes API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Indexes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all indexes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes"
+          },
+          "docs": "Returns metadata for all indexes in the cluster."
+        },
+        {
+          "info": {
+            "name": "Create an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/indexes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new search index with the provided configuration."
+        },
+        {
+          "info": {
+            "name": "Get index metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ]
+          },
+          "docs": "Returns the metadata for a specific index."
+        },
+        {
+          "info": {
+            "name": "Update an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "Create the index if it does not exist"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing index configuration. Optionally creates the index if it does not exist."
+        },
+        {
+          "info": {
+            "name": "Delete an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ]
+          },
+          "docs": "Deletes an index and returns the metadata of all deleted splits."
+        },
+        {
+          "info": {
+            "name": "Describe an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/describe",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ]
+          },
+          "docs": "Returns statistics and metadata about the index including document counts and size."
+        },
+        {
+          "info": {
+            "name": "Clear an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/clear",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ]
+          },
+          "docs": "Removes all documents from the index while keeping the index configuration."
+        },
+        {
+          "info": {
+            "name": "List splits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/splits",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of splits to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of splits to return"
+              },
+              {
+                "name": "split_states",
+                "value": "",
+                "type": "query",
+                "description": "Filter by split state (comma-separated)"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Minimum timestamp filter in seconds"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Maximum timestamp filter in seconds"
+              },
+              {
+                "name": "end_create_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Maximum creation date filter"
+              }
+            ]
+          },
+          "docs": "Returns the list of splits for a given index with optional filtering."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

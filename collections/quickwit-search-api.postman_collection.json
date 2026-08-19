@@ -1,0 +1,730 @@
+{
+  "item": [
+    {
+      "id": "a175bf44-3a08-4632-a62c-b2186a55f2c0",
+      "name": "Search",
+      "description": {
+        "content": "Query documents across indexes using full-text and aggregation queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d1c5d60-bc83-400b-b437-83d31c996b20",
+          "name": "Search an index (GET)",
+          "request": {
+            "name": "Search an index (GET)",
+            "description": {
+              "content": "Executes a search query against a specific index using GET parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Full-text search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<long>",
+                  "description": "Minimum timestamp filter in seconds (inclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<long>",
+                  "description": "Maximum timestamp filter in seconds (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_offset",
+                  "value": "0",
+                  "description": "Number of documents to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_hits",
+                  "value": "20",
+                  "description": "Maximum number of hits to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_field",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to search in"
+                },
+                {
+                  "disabled": false,
+                  "key": "snippet_fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to extract snippets from"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Sort field(s). Prefix with - for descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "pretty_json",
+                  "description": "Output format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1bfea77-3b37-44bc-bfd2-f1f3fd0c900a",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "error AND severity:high"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "max_hits",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search_field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "snippet_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hits\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    {\n      \"key_0\": 4393.245793614181,\n      \"key_1\": \"string\"\n    }\n  ],\n  \"num_hits\": 201,\n  \"elapsed_time_micros\": 5316,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"aggregations\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e8c9e5a-6268-4f79-83b4-11bf21a577f8",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "error AND severity:high"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "max_hits",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search_field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "snippet_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33ec643e-3b5c-4eaa-8596-2425e1e16944",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "error AND severity:high"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "max_hits",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search_field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "snippet_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e14b213b-589c-420d-9e93-4cda358e8b84",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "error AND severity:high"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "max_hits",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search_field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "snippet_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e667a1ef-264b-42c5-a8fa-d657b988337c",
+          "name": "Search an index (POST)",
+          "request": {
+            "name": "Search an index (POST)",
+            "description": {
+              "content": "Executes a search query against a specific index using a JSON request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\",\n  \"start_offset\": 0,\n  \"max_hits\": 20,\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"snippet_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"aggs\": {\n    \"key_0\": 3763.0442089091885,\n    \"key_1\": 5203.285159449743\n  },\n  \"format\": \"pretty_json\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ac559ce-8063-4e1e-bf9b-1334c9468e9a",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"error AND service:api\",\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\",\n  \"start_offset\": 0,\n  \"max_hits\": 20,\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"snippet_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"aggs\": {\n    \"key_0\": false,\n    \"key_1\": 1225.5738522736226\n  },\n  \"format\": \"pretty_json\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hits\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    {\n      \"key_0\": 4393.245793614181,\n      \"key_1\": \"string\"\n    }\n  ],\n  \"num_hits\": 201,\n  \"elapsed_time_micros\": 5316,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"aggregations\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7502287b-4a2b-4c86-829b-8f6b0ec1be46",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"error AND service:api\",\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\",\n  \"start_offset\": 0,\n  \"max_hits\": 20,\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"snippet_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"aggs\": {\n    \"key_0\": false,\n    \"key_1\": 1225.5738522736226\n  },\n  \"format\": \"pretty_json\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca2fe468-f408-452f-b7ab-09c5fb656649",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"error AND service:api\",\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\",\n  \"start_offset\": 0,\n  \"max_hits\": 20,\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"snippet_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"aggs\": {\n    \"key_0\": false,\n    \"key_1\": 1225.5738522736226\n  },\n  \"format\": \"pretty_json\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e932caf0-101c-4b38-8fa9-869f003c1c76",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"error AND service:api\",\n  \"start_timestamp\": \"<long>\",\n  \"end_timestamp\": \"<long>\",\n  \"start_offset\": 0,\n  \"max_hits\": 20,\n  \"search_field\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"snippet_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sort_by\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"aggs\": {\n    \"key_0\": false,\n    \"key_1\": 1225.5738522736226\n  },\n  \"format\": \"pretty_json\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e88bd52-17e0-41ab-998e-66152ed36b2d",
+    "name": "Quickwit REST Cluster Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}

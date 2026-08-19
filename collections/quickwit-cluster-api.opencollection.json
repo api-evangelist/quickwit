@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Liveness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/health/livez"
+          },
+          "docs": "Returns 200 if the node is alive."
+        },
+        {
+          "info": {
+            "name": "Readiness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/health/readyz"
+          },
+          "docs": "Returns 200 if the node is ready to serve requests."
+        },
+        {
+          "info": {
+            "name": "Get cluster state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/cluster",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format"
+              }
+            ]
+          },
+          "docs": "Returns the current state of the Quickwit cluster including all node information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

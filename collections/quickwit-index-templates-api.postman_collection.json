@@ -1,0 +1,925 @@
+{
+  "item": [
+    {
+      "id": "17f45cb8-e900-471a-9832-a9ef8314bd0d",
+      "name": "Index Templates",
+      "description": {
+        "content": "Manage index templates for automatic index creation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "030244a9-633b-4e38-be7f-f2e34803a7c8",
+          "name": "List index templates",
+          "request": {
+            "name": "List index templates",
+            "description": {
+              "content": "Returns all index templates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51bb1c82-b26d-4732-a287-ac7998711563",
+              "name": "List of index templates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"version\": \"string\",\n    \"template_id\": \"string\",\n    \"index_id_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"priority\": 0,\n    \"description\": \"string\",\n    \"doc_mapping\": {\n      \"field_mappings\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"ip\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": true\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"u64\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": true\n        }\n      ],\n      \"timestamp_field\": \"string\",\n      \"tag_fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"store_source\": false,\n      \"dynamic_mapping\": {}\n    },\n    \"indexing_settings\": {\n      \"commit_timeout_secs\": 1848,\n      \"split_num_docs_target\": 2355,\n      \"merge_policy\": {},\n      \"resources\": {}\n    },\n    \"search_settings\": {\n      \"default_search_fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"retention\": {\n      \"period\": \"string\",\n      \"schedule\": \"string\"\n    }\n  },\n  {\n    \"version\": \"string\",\n    \"template_id\": \"string\",\n    \"index_id_patterns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"priority\": 0,\n    \"description\": \"string\",\n    \"doc_mapping\": {\n      \"field_mappings\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"bytes\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": true\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"f64\",\n          \"fast\": false,\n          \"indexed\": true,\n          \"stored\": false\n        }\n      ],\n      \"timestamp_field\": \"string\",\n      \"tag_fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"store_source\": false,\n      \"dynamic_mapping\": {}\n    },\n    \"indexing_settings\": {\n      \"commit_timeout_secs\": 2297,\n      \"split_num_docs_target\": 20,\n      \"merge_policy\": {},\n      \"resources\": {}\n    },\n    \"search_settings\": {\n      \"default_search_fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"retention\": {\n      \"period\": \"string\",\n      \"schedule\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3518943e-3dff-4a29-ba31-f74a2124dbd4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62f1e8d7-a9ea-4c76-a6bb-1663ac76b14a",
+          "name": "Create an index template",
+          "request": {
+            "name": "Create an index template",
+            "description": {
+              "content": "Creates a new index template used to auto-configure new indexes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      }\n    ],\n    \"timestamp_field\": \"<string>\",\n    \"tag_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"store_source\": \"<boolean>\",\n    \"dynamic_mapping\": \"<object>\"\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": \"<integer>\",\n    \"split_num_docs_target\": \"<integer>\",\n    \"merge_policy\": \"<object>\",\n    \"resources\": \"<object>\"\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"<string>\",\n    \"schedule\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c6939a0-3845-404e-8433-12183c36b97e",
+              "name": "Template created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"template_id\": \"string\",\n  \"index_id_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"priority\": 0,\n  \"description\": \"string\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": false,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 2640,\n    \"split_num_docs_target\": 9169,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ff590b5-4e9a-4617-9e2d-95f991d55bfe",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ce8f300-676f-4644-ad32-0ad733d789fd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09f91560-e2ad-4803-b34f-d1bab5bacfb0",
+          "name": "Get an index template",
+          "request": {
+            "name": "Get an index template",
+            "description": {
+              "content": "Returns a specific index template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "templates",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) The index template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f85161f-9cc2-4f83-96e2-0550bffe3ef6",
+              "name": "Index template",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"template_id\": \"string\",\n  \"index_id_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"priority\": 0,\n  \"description\": \"string\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": false,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 2640,\n    \"split_num_docs_target\": 9169,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6342d5a3-3800-4e99-b1d3-584bb6230622",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "933ee6a6-f8c2-4348-be71-15ec2065c9f4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e2902bd-acaa-4b47-b96b-00988c638714",
+          "name": "Update an index template",
+          "request": {
+            "name": "Update an index template",
+            "description": {
+              "content": "Updates an existing index template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "templates",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) The index template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      }\n    ],\n    \"timestamp_field\": \"<string>\",\n    \"tag_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"store_source\": \"<boolean>\",\n    \"dynamic_mapping\": \"<object>\"\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": \"<integer>\",\n    \"split_num_docs_target\": \"<integer>\",\n    \"merge_policy\": \"<object>\",\n    \"resources\": \"<object>\"\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"<string>\",\n    \"schedule\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61ca997e-469c-46c2-919e-1b9706109609",
+              "name": "Template updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"template_id\": \"string\",\n  \"index_id_patterns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"priority\": 0,\n  \"description\": \"string\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": false,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"bool\",\n        \"fast\": true,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 2640,\n    \"split_num_docs_target\": 9169,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb94b8cf-0f93-47af-b487-dd5270464932",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cad81b98-768b-4ed9-a3e2-19b5019486a3",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9529fca8-f34a-4988-a879-552c36e73a1a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"index_id_patterns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 0,\n  \"description\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"json\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": false,\n    \"dynamic_mapping\": {}\n  },\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 7505,\n    \"split_num_docs_target\": 6011,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afb0b382-50fd-47e2-813f-8ac972229c3d",
+          "name": "Delete an index template",
+          "request": {
+            "name": "Delete an index template",
+            "description": {
+              "content": "Deletes an index template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "templates",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) The index template identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ee5d68a-4bfa-4dac-8ee2-d097a6187126",
+              "name": "Template deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90ff040f-a370-4a8d-9079-1876ca8d1371",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a7fcfa8-1cb4-4e60-9e64-ed44f6124f5f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The index template identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f01001d9-8504-4365-b093-cac61fe589a7",
+    "name": "Quickwit REST Cluster Index Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}

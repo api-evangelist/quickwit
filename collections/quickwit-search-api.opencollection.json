@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Search API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search an index (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/search",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "query",
+                "value": "error AND severity:high",
+                "type": "query",
+                "description": "Full-text search query string"
+              },
+              {
+                "name": "start_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Minimum timestamp filter in seconds (inclusive)"
+              },
+              {
+                "name": "end_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Maximum timestamp filter in seconds (exclusive)"
+              },
+              {
+                "name": "start_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of documents to skip"
+              },
+              {
+                "name": "max_hits",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of hits to return"
+              },
+              {
+                "name": "search_field",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to search in"
+              },
+              {
+                "name": "snippet_fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to extract snippets from"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort field(s). Prefix with - for descending order."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format"
+              }
+            ]
+          },
+          "docs": "Executes a search query against a specific index using GET parameters."
+        },
+        {
+          "info": {
+            "name": "Search an index (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/search",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a search query against a specific index using a JSON request body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

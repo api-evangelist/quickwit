@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Index Templates API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Index Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List index templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/templates"
+          },
+          "docs": "Returns all index templates."
+        },
+        {
+          "info": {
+            "name": "Create an index template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new index template used to auto-configure new indexes."
+        },
+        {
+          "info": {
+            "name": "Get an index template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7280/api/v1/templates/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "my-template",
+                "type": "path",
+                "description": "The index template identifier"
+              }
+            ]
+          },
+          "docs": "Returns a specific index template."
+        },
+        {
+          "info": {
+            "name": "Update an index template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/templates/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "my-template",
+                "type": "path",
+                "description": "The index template identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing index template."
+        },
+        {
+          "info": {
+            "name": "Delete an index template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:7280/api/v1/templates/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "my-template",
+                "type": "path",
+                "description": "The index template identifier"
+              }
+            ]
+          },
+          "docs": "Deletes an index template."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

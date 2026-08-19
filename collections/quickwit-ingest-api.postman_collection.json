@@ -1,0 +1,326 @@
+{
+  "item": [
+    {
+      "id": "584534dd-1f8d-42e5-99d5-14d70f4c884a",
+      "name": "Ingest",
+      "description": {
+        "content": "Add documents to indexes via NDJSON format",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b34f50d-66e8-41af-812e-70a6607654e9",
+          "name": "Ingest documents",
+          "request": {
+            "name": "Ingest documents",
+            "description": {
+              "content": "Ingests NDJSON documents into an index. Each line in the request body must be a valid JSON object. The commit parameter controls when the documents become searchable.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "ingest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "commit",
+                  "value": "auto",
+                  "description": "Controls when documents become searchable. 'auto' lets Quickwit decide, 'wait_for' waits for next commit, 'force' triggers an immediate commit.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "detailed_response",
+                  "value": "false",
+                  "description": "Include parse_failures in the response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-ndjson"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "ac02a270-4671-45c9-9ba5-c7b84e98dec5",
+              "name": "Documents ingested successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "commit",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "detailed_response",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"message\": \"log line 1\", \"timestamp\": 1700000000}\n{\"message\": \"log line 2\", \"timestamp\": 1700000001}\n"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"num_docs_for_processing\": 8253,\n  \"num_ingested_docs\": 2952,\n  \"num_rejected_docs\": 3968,\n  \"parse_failures\": [\n    {\n      \"reason\": \"string\",\n      \"document\": \"string\"\n    },\n    {\n      \"reason\": \"string\",\n      \"document\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f292105-24c2-4625-904a-a0cd839ee238",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "commit",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "detailed_response",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"message\": \"log line 1\", \"timestamp\": 1700000000}\n{\"message\": \"log line 2\", \"timestamp\": 1700000001}\n"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a348d43-d072-49bf-92b9-1826906852c5",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "commit",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "detailed_response",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"message\": \"log line 1\", \"timestamp\": 1700000000}\n{\"message\": \"log line 2\", \"timestamp\": 1700000001}\n"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b42c7f4f-e0e5-4034-8a5f-acf57e13453a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "commit",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "detailed_response",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"message\": \"log line 1\", \"timestamp\": 1700000000}\n{\"message\": \"log line 2\", \"timestamp\": 1700000001}\n"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "78bb1e67-4eb6-44a1-8085-90bb9fb0861c",
+    "name": "Quickwit REST Cluster Ingest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}

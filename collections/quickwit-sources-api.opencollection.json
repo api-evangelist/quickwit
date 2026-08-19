@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Sources API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/sources",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data source for an index."
+        },
+        {
+          "info": {
+            "name": "Update a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/sources/:source_id",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "source_id",
+                "value": "my-kafka-source",
+                "type": "path",
+                "description": "The source identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing data source configuration."
+        },
+        {
+          "info": {
+            "name": "Delete a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/sources/:source_id",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "source_id",
+                "value": "my-kafka-source",
+                "type": "path",
+                "description": "The source identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a data source from an index."
+        },
+        {
+          "info": {
+            "name": "Toggle a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/sources/:source_id/toggle",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "source_id",
+                "value": "my-kafka-source",
+                "type": "path",
+                "description": "The source identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables or disables a data source."
+        },
+        {
+          "info": {
+            "name": "Reset source checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/sources/:source_id/reset-checkpoint",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "source_id",
+                "value": "my-kafka-source",
+                "type": "path",
+                "description": "The source identifier"
+              }
+            ]
+          },
+          "docs": "Resets the checkpoint for a data source, causing it to re-read from the beginning."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

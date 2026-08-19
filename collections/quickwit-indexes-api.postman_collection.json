@@ -1,0 +1,1647 @@
+{
+  "item": [
+    {
+      "id": "e3ddf478-6af6-4d95-a821-b386442860b0",
+      "name": "Indexes",
+      "description": {
+        "content": "Create, update, retrieve, and manage search indexes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91354565-992c-43ac-a816-6bbc9cff41fc",
+          "name": "List all indexes",
+          "request": {
+            "name": "List all indexes",
+            "description": {
+              "content": "Returns metadata for all indexes in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c923188b-13f1-47a0-8e4f-dd66e47daace",
+              "name": "List of index metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"version\": \"string\",\n    \"index_uid\": \"string\",\n    \"index_config\": {\n      \"version\": \"0.8\",\n      \"index_id\": \"my-log-index\",\n      \"doc_mapping\": {\n        \"field_mappings\": [\n          {\n            \"name\": \"string\",\n            \"type\": \"datetime\",\n            \"fast\": false,\n            \"indexed\": false,\n            \"stored\": false\n          },\n          {\n            \"name\": \"string\",\n            \"type\": \"f64\",\n            \"fast\": true,\n            \"indexed\": true,\n            \"stored\": true\n          }\n        ],\n        \"timestamp_field\": \"string\",\n        \"tag_fields\": [\n          \"string\",\n          \"string\"\n        ],\n        \"store_source\": true,\n        \"dynamic_mapping\": {}\n      },\n      \"index_uri\": \"s3://my-bucket/my-index\",\n      \"indexing_settings\": {\n        \"commit_timeout_secs\": 8564,\n        \"split_num_docs_target\": 3474,\n        \"merge_policy\": {},\n        \"resources\": {}\n      },\n      \"search_settings\": {\n        \"default_search_fields\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"retention\": {\n        \"period\": \"string\",\n        \"schedule\": \"string\"\n      }\n    },\n    \"checkpoint\": {},\n    \"create_timestamp\": 95,\n    \"sources\": [\n      {\n        \"version\": \"string\",\n        \"source_id\": \"my-kafka-source\",\n        \"source_type\": \"pulsar\",\n        \"params\": {\n          \"key_0\": true,\n          \"key_1\": \"string\"\n        },\n        \"num_pipelines\": 1,\n        \"transform\": {\n          \"vrl_script\": \"string\",\n          \"timezone\": \"UTC\"\n        }\n      },\n      {\n        \"version\": \"string\",\n        \"source_id\": \"my-kafka-source\",\n        \"source_type\": \"void\",\n        \"params\": {\n          \"key_0\": true,\n          \"key_1\": true\n        },\n        \"num_pipelines\": 1,\n        \"transform\": {\n          \"vrl_script\": \"string\",\n          \"timezone\": \"UTC\"\n        }\n      }\n    ]\n  },\n  {\n    \"version\": \"string\",\n    \"index_uid\": \"string\",\n    \"index_config\": {\n      \"version\": \"0.8\",\n      \"index_id\": \"my-log-index\",\n      \"doc_mapping\": {\n        \"field_mappings\": [\n          {\n            \"name\": \"string\",\n            \"type\": \"json\",\n            \"fast\": true,\n            \"indexed\": true,\n            \"stored\": false\n          },\n          {\n            \"name\": \"string\",\n            \"type\": \"text\",\n            \"fast\": true,\n            \"indexed\": true,\n            \"stored\": true\n          }\n        ],\n        \"timestamp_field\": \"string\",\n        \"tag_fields\": [\n          \"string\",\n          \"string\"\n        ],\n        \"store_source\": false,\n        \"dynamic_mapping\": {}\n      },\n      \"index_uri\": \"s3://my-bucket/my-index\",\n      \"indexing_settings\": {\n        \"commit_timeout_secs\": 6538,\n        \"split_num_docs_target\": 8319,\n        \"merge_policy\": {},\n        \"resources\": {}\n      },\n      \"search_settings\": {\n        \"default_search_fields\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"retention\": {\n        \"period\": \"string\",\n        \"schedule\": \"string\"\n      }\n    },\n    \"checkpoint\": {},\n    \"create_timestamp\": 5745,\n    \"sources\": [\n      {\n        \"version\": \"string\",\n        \"source_id\": \"my-kafka-source\",\n        \"source_type\": \"kafka\",\n        \"params\": {\n          \"key_0\": 6840\n        },\n        \"num_pipelines\": 1,\n        \"transform\": {\n          \"vrl_script\": \"string\",\n          \"timezone\": \"UTC\"\n        }\n      },\n      {\n        \"version\": \"string\",\n        \"source_id\": \"my-kafka-source\",\n        \"source_type\": \"void\",\n        \"params\": {\n          \"key_0\": \"string\",\n          \"key_1\": 9662.567798999056\n        },\n        \"num_pipelines\": 1,\n        \"transform\": {\n          \"vrl_script\": \"string\",\n          \"timezone\": \"UTC\"\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04496e4a-c7cf-4816-bfb4-b34aaffa710b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cb80119-ae99-41b1-b0c2-9f547ffa88fe",
+          "name": "Create an index",
+          "request": {
+            "name": "Create an index",
+            "description": {
+              "content": "Creates a new search index with the provided configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<string>\",\n  \"index_id\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      }\n    ],\n    \"timestamp_field\": \"<string>\",\n    \"tag_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"store_source\": \"<boolean>\",\n    \"dynamic_mapping\": \"<object>\"\n  },\n  \"index_uri\": \"<string>\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": \"<integer>\",\n    \"split_num_docs_target\": \"<integer>\",\n    \"merge_policy\": \"<object>\",\n    \"resources\": \"<object>\"\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"<string>\",\n    \"schedule\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e19e70fb-0d3c-43e6-9717-3ed446f9f37d",
+              "name": "Index created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"index_uid\": \"string\",\n  \"index_config\": {\n    \"version\": \"0.8\",\n    \"index_id\": \"my-log-index\",\n    \"doc_mapping\": {\n      \"field_mappings\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"u64\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": false\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"text\",\n          \"fast\": true,\n          \"indexed\": false,\n          \"stored\": true\n        }\n      ],\n      \"timestamp_field\": \"string\",\n      \"tag_fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"store_source\": false,\n      \"dynamic_mapping\": {}\n    },\n    \"index_uri\": \"s3://my-bucket/my-index\",\n    \"indexing_settings\": {\n      \"commit_timeout_secs\": 8076,\n      \"split_num_docs_target\": 2012,\n      \"merge_policy\": {},\n      \"resources\": {}\n    },\n    \"search_settings\": {\n      \"default_search_fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"retention\": {\n      \"period\": \"string\",\n      \"schedule\": \"string\"\n    }\n  },\n  \"checkpoint\": {},\n  \"create_timestamp\": 7209,\n  \"sources\": [\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"void\",\n      \"params\": {\n        \"key_0\": 7420\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    },\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"vec\",\n      \"params\": {\n        \"key_0\": true,\n        \"key_1\": 6308\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb1de1f6-8f71-4d24-bc75-b9f5a69dcdb2",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac20d999-e504-4995-9996-9ee20af20ed1",
+              "name": "Index already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89f503a9-0fd4-4741-a40b-f56861b324a8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb6c5f73-c2df-464b-bc69-53e15f75feb8",
+          "name": "Get index metadata",
+          "request": {
+            "name": "Get index metadata",
+            "description": {
+              "content": "Returns the metadata for a specific index.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afe96efc-5758-45f1-860b-c9d16513c70d",
+              "name": "Index metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"index_uid\": \"string\",\n  \"index_config\": {\n    \"version\": \"0.8\",\n    \"index_id\": \"my-log-index\",\n    \"doc_mapping\": {\n      \"field_mappings\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"u64\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": false\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"text\",\n          \"fast\": true,\n          \"indexed\": false,\n          \"stored\": true\n        }\n      ],\n      \"timestamp_field\": \"string\",\n      \"tag_fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"store_source\": false,\n      \"dynamic_mapping\": {}\n    },\n    \"index_uri\": \"s3://my-bucket/my-index\",\n    \"indexing_settings\": {\n      \"commit_timeout_secs\": 8076,\n      \"split_num_docs_target\": 2012,\n      \"merge_policy\": {},\n      \"resources\": {}\n    },\n    \"search_settings\": {\n      \"default_search_fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"retention\": {\n      \"period\": \"string\",\n      \"schedule\": \"string\"\n    }\n  },\n  \"checkpoint\": {},\n  \"create_timestamp\": 7209,\n  \"sources\": [\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"void\",\n      \"params\": {\n        \"key_0\": 7420\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    },\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"vec\",\n      \"params\": {\n        \"key_0\": true,\n        \"key_1\": 6308\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9cc4031-2f1c-43b0-a7ad-23d210b1102b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8398c89f-c9f3-46f1-a4db-393908586614",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97b8e26f-5781-4606-a021-f1648765efb2",
+          "name": "Update an index",
+          "request": {
+            "name": "Update an index",
+            "description": {
+              "content": "Updates an existing index configuration. Optionally creates the index if it does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "create",
+                  "value": "false",
+                  "description": "Create the index if it does not exist"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<string>\",\n  \"index_id\": \"<string>\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fast\": \"<boolean>\",\n        \"indexed\": \"<boolean>\",\n        \"stored\": \"<boolean>\"\n      }\n    ],\n    \"timestamp_field\": \"<string>\",\n    \"tag_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"store_source\": \"<boolean>\",\n    \"dynamic_mapping\": \"<object>\"\n  },\n  \"index_uri\": \"<string>\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": \"<integer>\",\n    \"split_num_docs_target\": \"<integer>\",\n    \"merge_policy\": \"<object>\",\n    \"resources\": \"<object>\"\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"<string>\",\n    \"schedule\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c8388ff-7c6d-4fc5-96ca-01d632bc9717",
+              "name": "Index updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"index_uid\": \"string\",\n  \"index_config\": {\n    \"version\": \"0.8\",\n    \"index_id\": \"my-log-index\",\n    \"doc_mapping\": {\n      \"field_mappings\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"u64\",\n          \"fast\": true,\n          \"indexed\": true,\n          \"stored\": false\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"text\",\n          \"fast\": true,\n          \"indexed\": false,\n          \"stored\": true\n        }\n      ],\n      \"timestamp_field\": \"string\",\n      \"tag_fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"store_source\": false,\n      \"dynamic_mapping\": {}\n    },\n    \"index_uri\": \"s3://my-bucket/my-index\",\n    \"indexing_settings\": {\n      \"commit_timeout_secs\": 8076,\n      \"split_num_docs_target\": 2012,\n      \"merge_policy\": {},\n      \"resources\": {}\n    },\n    \"search_settings\": {\n      \"default_search_fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"retention\": {\n      \"period\": \"string\",\n      \"schedule\": \"string\"\n    }\n  },\n  \"checkpoint\": {},\n  \"create_timestamp\": 7209,\n  \"sources\": [\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"void\",\n      \"params\": {\n        \"key_0\": 7420\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    },\n    {\n      \"version\": \"string\",\n      \"source_id\": \"my-kafka-source\",\n      \"source_type\": \"vec\",\n      \"params\": {\n        \"key_0\": true,\n        \"key_1\": 6308\n      },\n      \"num_pipelines\": 1,\n      \"transform\": {\n        \"vrl_script\": \"string\",\n        \"timezone\": \"UTC\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef90b769-785c-4c67-a422-266da5fd7856",
+              "name": "Bad request - invalid parameters or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87bbd3c3-531d-4bd1-8b47-93b953396685",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "425c1e3c-ad78-4b0d-a2dc-7223e1c6866f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": \"0.8\",\n  \"index_id\": \"my-log-index\",\n  \"doc_mapping\": {\n    \"field_mappings\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"i64\",\n        \"fast\": false,\n        \"indexed\": false,\n        \"stored\": false\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"ip\",\n        \"fast\": false,\n        \"indexed\": true,\n        \"stored\": true\n      }\n    ],\n    \"timestamp_field\": \"string\",\n    \"tag_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"store_source\": true,\n    \"dynamic_mapping\": {}\n  },\n  \"index_uri\": \"s3://my-bucket/my-index\",\n  \"indexing_settings\": {\n    \"commit_timeout_secs\": 8276,\n    \"split_num_docs_target\": 2508,\n    \"merge_policy\": {},\n    \"resources\": {}\n  },\n  \"search_settings\": {\n    \"default_search_fields\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"retention\": {\n    \"period\": \"string\",\n    \"schedule\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edc8de15-7b06-4850-a718-cd1d6e5605fd",
+          "name": "Delete an index",
+          "request": {
+            "name": "Delete an index",
+            "description": {
+              "content": "Deletes an index and returns the metadata of all deleted splits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a58a4180-cc91-48fa-b03b-76f342910a02",
+              "name": "Index deleted, returns deleted splits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"split_id\": \"string\",\n    \"index_uid\": \"string\",\n    \"split_state\": \"Published\",\n    \"num_docs\": 9023,\n    \"size_in_bytes\": 4826,\n    \"create_timestamp\": 7204,\n    \"time_range\": {\n      \"start\": 1926,\n      \"end\": 2860\n    }\n  },\n  {\n    \"split_id\": \"string\",\n    \"index_uid\": \"string\",\n    \"split_state\": \"Staged\",\n    \"num_docs\": 2783,\n    \"size_in_bytes\": 8396,\n    \"create_timestamp\": 5445,\n    \"time_range\": {\n      \"start\": 6504,\n      \"end\": 6376\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e44cbb1d-ad52-46de-a960-81a52daa244f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe54235d-9858-4839-93cc-65fa1566ef5c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a050a298-9981-456a-bb3e-ce1c162e1374",
+          "name": "Describe an index",
+          "request": {
+            "name": "Describe an index",
+            "description": {
+              "content": "Returns statistics and metadata about the index including document counts and size.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "describe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "436bd88b-3889-4dc5-b65e-be6602254418",
+              "name": "Index description with statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"index_id\": \"string\",\n  \"index_uri\": \"string\",\n  \"num_published_splits\": 9442,\n  \"size_published_splits\": 5820,\n  \"num_published_docs\": 5988,\n  \"size_published_docs_uncompressed\": 2082,\n  \"timestamp_field_name\": \"string\",\n  \"min_timestamp\": 5374,\n  \"max_timestamp\": 3991\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c09a839-b767-4646-9aab-a554de3b81ab",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2483499c-8acd-417a-95f6-298977a6c5e1",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3066faa-eac6-40c2-abc0-0e72feab021a",
+          "name": "Clear an index",
+          "request": {
+            "name": "Clear an index",
+            "description": {
+              "content": "Removes all documents from the index while keeping the index configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "clear"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8556a54b-9e4f-49ea-a409-703f2fe2ea9c",
+              "name": "Index cleared successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9d8d16c-8a25-4b3e-93b7-e6fa4532ac04",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc2c69c0-dfbb-478d-b2fb-4f1bf0be5311",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e695b00-d607-41dd-8d3f-32272fcb28eb",
+          "name": "List splits",
+          "request": {
+            "name": "List splits",
+            "description": {
+              "content": "Returns the list of splits for a given index with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "indexes",
+                ":index_id",
+                "splits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of splits to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of splits to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "split_states",
+                  "value": "<string>",
+                  "description": "Filter by split state (comma-separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_timestamp",
+                  "value": "<long>",
+                  "description": "Minimum timestamp filter in seconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_timestamp",
+                  "value": "<long>",
+                  "description": "Maximum timestamp filter in seconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_create_timestamp",
+                  "value": "<long>",
+                  "description": "Maximum creation date filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "index_id",
+                  "description": "(Required) The index identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40031a1f-8649-415e-807a-f86fce481de4",
+              "name": "List of splits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "splits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "split_states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_create_timestamp",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offset\": 6645,\n  \"size\": 9284,\n  \"splits\": [\n    {\n      \"split_id\": \"string\",\n      \"index_uid\": \"string\",\n      \"split_state\": \"Staged\",\n      \"num_docs\": 3267,\n      \"size_in_bytes\": 6075,\n      \"create_timestamp\": 7546,\n      \"time_range\": {\n        \"start\": 1881,\n        \"end\": 7880\n      }\n    },\n    {\n      \"split_id\": \"string\",\n      \"index_uid\": \"string\",\n      \"split_state\": \"Published\",\n      \"num_docs\": 5107,\n      \"size_in_bytes\": 6370,\n      \"create_timestamp\": 1031,\n      \"time_range\": {\n        \"start\": 1857,\n        \"end\": 4492\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03f06656-21f8-4f16-8462-d884ce7eee1b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "splits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "split_states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_create_timestamp",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8168d794-0198-46fe-99ed-f26768a3e558",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexes",
+                    ":index_id",
+                    "splits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "split_states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_timestamp",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_create_timestamp",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "index_id",
+                      "description": "(Required) The index identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ca107398-6c71-4a8e-9d79-8a16078cdb32",
+    "name": "Quickwit REST Cluster Indexes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}

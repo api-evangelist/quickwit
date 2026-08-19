@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quickwit REST Cluster Ingest API",
+    "version": "0.8.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ingest documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7280/api/v1/indexes/:index_id/ingest",
+            "params": [
+              {
+                "name": "index_id",
+                "value": "my-index",
+                "type": "path",
+                "description": "The index identifier"
+              },
+              {
+                "name": "commit",
+                "value": "",
+                "type": "query",
+                "description": "Controls when documents become searchable. 'auto' lets Quickwit decide, 'wait_for' waits for next commit, 'force' triggers an immediate commit.\n"
+              },
+              {
+                "name": "detailed_response",
+                "value": "",
+                "type": "query",
+                "description": "Include parse_failures in the response"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ingests NDJSON documents into an index. Each line in the request body must be a valid JSON object. The commit parameter controls when the documents become searchable.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

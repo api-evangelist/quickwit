@@ -1,0 +1,274 @@
+{
+  "item": [
+    {
+      "id": "bc0f526f-66a1-4e48-978f-d042bb38eca9",
+      "name": "Cluster",
+      "description": {
+        "content": "Monitor cluster state and node health",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "037ece49-94a3-4fab-adab-aca54152f28a",
+          "name": "Liveness check",
+          "request": {
+            "name": "Liveness check",
+            "description": {
+              "content": "Returns 200 if the node is alive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health",
+                "livez"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c02c98d-d8e2-481a-aed9-586ddabc855c",
+              "name": "Node is alive",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "livez"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f64acb5c-ddf8-4476-9027-70798fc5044b",
+          "name": "Readiness check",
+          "request": {
+            "name": "Readiness check",
+            "description": {
+              "content": "Returns 200 if the node is ready to serve requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health",
+                "readyz"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28441657-e6bb-4e19-a671-7c41fbc1a8b2",
+              "name": "Node is ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "readyz"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a7bdf2a-c3ed-4307-b58a-508ded2f4dd2",
+          "name": "Get cluster state",
+          "request": {
+            "name": "Get cluster state",
+            "description": {
+              "content": "Returns the current state of the Quickwit cluster including all node information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "pretty_json",
+                  "description": "Output format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2e33371-b405-49e8-8acd-e5d83e29b742",
+              "name": "Cluster state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster_id\": \"string\",\n  \"node_id\": \"string\",\n  \"num_live_nodes\": 8200,\n  \"live_nodes\": [\n    {\n      \"node_id\": \"string\",\n      \"listen_addr\": \"string\",\n      \"indexer_cpu_capacity\": 2516.308577840407\n    },\n    {\n      \"node_id\": \"string\",\n      \"listen_addr\": \"string\",\n      \"indexer_cpu_capacity\": 2880.417872373966\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7932fca5-19e9-44f6-b204-b6caaf60e5cf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "pretty_json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Index 'my-index' not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7280/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "30c0865c-eb29-4e81-87ad-d79679f7751c",
+    "name": "Quickwit REST Cluster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.\n\n\nContact Support:\n Name: Quickwit, Inc.\n Email: hello@quickwit.io",
+      "type": "text/plain"
+    }
+  }
+}
