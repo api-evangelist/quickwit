@@ -9,6 +9,20 @@ description: >
   OpenTelemetry, Jaeger tracing, and an Elasticsearch-compatible API.
   Quickwit joined Datadog in January 2025.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
@@ -130,6 +144,16 @@ apis:
   - type: Documentation
     url: https://quickwit.io/docs/reference/rest-api
 common:
+  - type: IssueTracker
+    url: https://github.com/quickwit-oss/quickwit/issues
+  - type: Releases
+    url: https://github.com/quickwit-oss/quickwit/releases
+  - type: SecurityPolicy
+    url: https://github.com/quickwit-oss/quickwit/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/quickwit-oss/quickwit/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/quickwit-oss/quickwit/blob/main/CONTRIBUTING.md
   - type: License
     name: Apache-2.0
     url: https://github.com/quickwit-oss/quickwit/blob/main/LICENSE
