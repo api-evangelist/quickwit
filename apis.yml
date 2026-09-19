@@ -101,6 +101,8 @@ apis:
   humanURL: https://quickwit.io/docs/reference/rest-api
   baseURL: https://your-quickwit-node/api/v1
   tags:
+  - Index
+  tags_raw:
   - Indexes
   properties:
   - type: OpenAPI
