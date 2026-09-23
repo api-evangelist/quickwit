@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Quickwit REST Cluster Sources API
-  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
-
-    '
+  title: Quickwit REST Sources API
+  description: The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
   version: 0.8.2
   license:
     name: Apache 2.0
@@ -143,14 +141,6 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   parameters:
-    sourceId:
-      name: source_id
-      in: path
-      description: The source identifier
-      required: true
-      schema:
-        type: string
-      example: my-kafka-source
     indexId:
       name: index_id
       in: path
@@ -159,9 +149,17 @@ components:
       schema:
         type: string
       example: my-index
+    sourceId:
+      name: source_id
+      in: path
+      description: The source identifier
+      required: true
+      schema:
+        type: string
+      example: my-kafka-source
   responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
+    InternalError:
+      description: Internal server error
       content:
         application/json:
           schema:
@@ -172,8 +170,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
+    BadRequest:
+      description: Bad request - invalid parameters or body
       content:
         application/json:
           schema:

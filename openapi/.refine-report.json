@@ -1,13 +1,7 @@
 {
   "provider": "quickwit",
   "sources": [
-    "quickwit-cluster-api-openapi.yml",
-    "quickwit-delete-tasks-api-openapi.yml",
-    "quickwit-index-templates-api-openapi.yml",
-    "quickwit-indexes-api-openapi.yml",
-    "quickwit-ingest-api-openapi.yml",
-    "quickwit-search-api-openapi.yml",
-    "quickwit-sources-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "quickwit-cluster-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "quickwit-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-delete-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-index-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-indexes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-ingest-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quickwit-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

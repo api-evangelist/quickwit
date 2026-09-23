@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Quickwit REST Cluster Indexes API
-  description: 'The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
-
-    '
+  title: Quickwit REST Indexes API
+  description: The Quickwit REST API provides endpoints for indexing NDJSON documents, executing full-text and aggregation search queries, managing indexes and data sources, streaming field values, deleting documents by query, and monitoring cluster health. Quickwit is a cloud-native search engine for log management and full-text search at petabyte scale.
   version: 0.8.2
   license:
     name: Apache 2.0
@@ -249,6 +247,26 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    RetentionPolicy:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Retention period (e.g. "90 days")
+        schedule:
+          type: string
+          description: Cron schedule for retention enforcement
+    SplitList:
+      type: object
+      properties:
+        offset:
+          type: integer
+        size:
+          type: integer
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitMetadata'
     IndexMetadata:
       type: object
       properties:
@@ -325,49 +343,6 @@ components:
           $ref: '#/components/schemas/SearchSettings'
         retention:
           $ref: '#/components/schemas/RetentionPolicy'
-    RetentionPolicy:
-      type: object
-      properties:
-        period:
-          type: string
-          description: Retention period (e.g. "90 days")
-        schedule:
-          type: string
-          description: Cron schedule for retention enforcement
-    SplitList:
-      type: object
-      properties:
-        offset:
-          type: integer
-        size:
-          type: integer
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/SplitMetadata'
-    SearchSettings:
-      type: object
-      properties:
-        default_search_fields:
-          type: array
-          items:
-            type: string
-          description: Fields searched when no field is specified in the query
-    IndexingSettings:
-      type: object
-      properties:
-        commit_timeout_secs:
-          type: integer
-          description: Maximum time before committing a split (seconds)
-        split_num_docs_target:
-          type: integer
-          description: Target number of docs per split
-        merge_policy:
-          type: object
-          description: Merge policy configuration
-        resources:
-          type: object
-          description: Resource limits for indexing
     SourceConfig:
       type: object
       required:
@@ -424,6 +399,51 @@ components:
           description: Human-readable error message
       example:
         message: Index 'my-index' not found
+    IndexingSettings:
+      type: object
+      properties:
+        commit_timeout_secs:
+          type: integer
+          description: Maximum time before committing a split (seconds)
+        split_num_docs_target:
+          type: integer
+          description: Target number of docs per split
+        merge_policy:
+          type: object
+          description: Merge policy configuration
+        resources:
+          type: object
+          description: Resource limits for indexing
+    SplitMetadata:
+      type: object
+      properties:
+        split_id:
+          type: string
+        index_uid:
+          type: string
+        split_state:
+          type: string
+          enum:
+          - Staged
+          - Published
+          - MarkedForDeletion
+        num_docs:
+          type: integer
+        size_in_bytes:
+          type: integer
+          format: int64
+        create_timestamp:
+          type: integer
+          format: int64
+        time_range:
+          type: object
+          properties:
+            start:
+              type: integer
+              format: int64
+            end:
+              type: integer
+              format: int64
     DocMapping:
       type: object
       properties:
@@ -465,39 +485,26 @@ components:
         dynamic_mapping:
           type: object
           description: Configuration for dynamic field mapping
-    SplitMetadata:
+    SearchSettings:
       type: object
       properties:
-        split_id:
-          type: string
-        index_uid:
-          type: string
-        split_state:
-          type: string
-          enum:
-          - Staged
-          - Published
-          - MarkedForDeletion
-        num_docs:
-          type: integer
-        size_in_bytes:
-          type: integer
-          format: int64
-        create_timestamp:
-          type: integer
-          format: int64
-        time_range:
-          type: object
-          properties:
-            start:
-              type: integer
-              format: int64
-            end:
-              type: integer
-              format: int64
+        default_search_fields:
+          type: array
+          items:
+            type: string
+          description: Fields searched when no field is specified in the query
+  parameters:
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index
   responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
+    InternalError:
+      description: Internal server error
       content:
         application/json:
           schema:
@@ -508,18 +515,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
+    BadRequest:
+      description: Bad request - invalid parameters or body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-  parameters:
-    indexId:
-      name: index_id
-      in: path
-      description: The index identifier
-      required: true
-      schema:
-        type: string
-      example: my-index
