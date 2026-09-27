@@ -79,145 +79,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  parameters:
-    endTimestamp:
-      name: end_timestamp
-      in: query
-      description: Maximum timestamp filter in seconds (exclusive)
-      required: false
-      schema:
-        type: integer
-        format: int64
-    sortBy:
-      name: sort_by
-      in: query
-      description: Sort field(s). Prefix with - for descending order.
-      required: false
-      schema:
-        type: string
-    indexId:
-      name: index_id
-      in: path
-      description: The index identifier
-      required: true
-      schema:
-        type: string
-      example: my-index
-    snippetFields:
-      name: snippet_fields
-      in: query
-      description: Comma-separated list of fields to extract snippets from
-      required: false
-      schema:
-        type: string
-    startTimestamp:
-      name: start_timestamp
-      in: query
-      description: Minimum timestamp filter in seconds (inclusive)
-      required: false
-      schema:
-        type: integer
-        format: int64
-    searchField:
-      name: search_field
-      in: query
-      description: Comma-separated list of fields to search in
-      required: false
-      schema:
-        type: string
-    format:
-      name: format
-      in: query
-      description: Output format
-      required: false
-      schema:
-        type: string
-        enum:
-        - json
-        - pretty_json
-        default: pretty_json
-    maxHits:
-      name: max_hits
-      in: query
-      description: Maximum number of hits to return
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 20
-    query:
-      name: query
-      in: query
-      description: Full-text search query string
-      required: true
-      schema:
-        type: string
-      example: error AND severity:high
-    startOffset:
-      name: start_offset
-      in: query
-      description: Number of documents to skip
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-  responses:
-    InternalError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   schemas:
-    SearchResponse:
-      type: object
-      properties:
-        hits:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          description: Array of matching documents
-        num_hits:
-          type: integer
-          format: int64
-          description: Total number of matching documents
-        elapsed_time_micros:
-          type: integer
-          format: int64
-          description: Query execution time in microseconds
-        errors:
-          type: array
-          items:
-            type: string
-          description: Non-fatal errors encountered during search
-        aggregations:
-          type: object
-          additionalProperties: true
-          description: Aggregation results
-    ApiError:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-      example:
-        message: Index 'my-index' not found
     SearchRequest:
       type: object
       required:
@@ -270,3 +132,141 @@ components:
           - json
           - pretty_json
           default: pretty_json
+    SearchResponse:
+      type: object
+      properties:
+        hits:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Array of matching documents
+        num_hits:
+          type: integer
+          format: int64
+          description: Total number of matching documents
+        elapsed_time_micros:
+          type: integer
+          format: int64
+          description: Query execution time in microseconds
+        errors:
+          type: array
+          items:
+            type: string
+          description: Non-fatal errors encountered during search
+        aggregations:
+          type: object
+          additionalProperties: true
+          description: Aggregation results
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    searchField:
+      name: search_field
+      in: query
+      description: Comma-separated list of fields to search in
+      required: false
+      schema:
+        type: string
+    format:
+      name: format
+      in: query
+      description: Output format
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - pretty_json
+        default: pretty_json
+    endTimestamp:
+      name: end_timestamp
+      in: query
+      description: Maximum timestamp filter in seconds (exclusive)
+      required: false
+      schema:
+        type: integer
+        format: int64
+    snippetFields:
+      name: snippet_fields
+      in: query
+      description: Comma-separated list of fields to extract snippets from
+      required: false
+      schema:
+        type: string
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index
+    startOffset:
+      name: start_offset
+      in: query
+      description: Number of documents to skip
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    query:
+      name: query
+      in: query
+      description: Full-text search query string
+      required: true
+      schema:
+        type: string
+      example: error AND severity:high
+    sortBy:
+      name: sort_by
+      in: query
+      description: Sort field(s). Prefix with - for descending order.
+      required: false
+      schema:
+        type: string
+    startTimestamp:
+      name: start_timestamp
+      in: query
+      description: Minimum timestamp filter in seconds (inclusive)
+      required: false
+      schema:
+        type: integer
+        format: int64
+    maxHits:
+      name: max_hits
+      in: query
+      description: Maximum number of hits to return
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 20

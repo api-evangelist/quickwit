@@ -46,7 +46,7 @@ tags:
   - Observability
   - Full-Text Search
   - Cloud-Native
-  - Open-Source
+  - Open Source
   - Distributed Tracing
   - Analytics
 tags_raw:
@@ -58,6 +58,7 @@ tags_raw:
   - Open Source
   - Distributed Tracing
   - Analytics
+  - Open-Source
 apis:
 - aid: quickwit:quickwit-cluster-api
   name: Quickwit Cluster API
