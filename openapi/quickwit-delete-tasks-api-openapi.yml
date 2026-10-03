@@ -70,25 +70,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   schemas:
     DeleteQuery:
       type: object
@@ -135,6 +116,25 @@ components:
           description: Human-readable error message
       example:
         message: Index 'my-index' not found
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   parameters:
     indexId:
       name: index_id

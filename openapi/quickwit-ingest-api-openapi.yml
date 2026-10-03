@@ -82,14 +82,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
+    InternalError:
+      description: Internal server error
       content:
         application/json:
           schema:
@@ -104,6 +104,16 @@ components:
         type: string
       example: my-index
   schemas:
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
     IngestResponse:
       type: object
       properties:
@@ -126,13 +136,3 @@ components:
               document:
                 type: string
           description: Details of parse failures (only if detailed_response=true)
-    ApiError:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-      example:
-        message: Index 'my-index' not found

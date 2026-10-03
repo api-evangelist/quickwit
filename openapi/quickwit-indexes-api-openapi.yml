@@ -246,64 +246,43 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   schemas:
-    SearchSettings:
+    ApiError:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
+    SplitList:
       type: object
       properties:
-        default_search_fields:
+        offset:
+          type: integer
+        size:
+          type: integer
+        splits:
           type: array
           items:
-            type: string
-          description: Fields searched when no field is specified in the query
-    SplitMetadata:
+            $ref: '#/components/schemas/SplitMetadata'
+    IndexingSettings:
       type: object
       properties:
-        split_id:
-          type: string
-        index_uid:
-          type: string
-        split_state:
-          type: string
-          enum:
-          - Staged
-          - Published
-          - MarkedForDeletion
-        num_docs:
+        commit_timeout_secs:
           type: integer
-        size_in_bytes:
+          description: Maximum time before committing a split (seconds)
+        split_num_docs_target:
           type: integer
-          format: int64
-        create_timestamp:
-          type: integer
-          format: int64
-        time_range:
+          description: Target number of docs per split
+        merge_policy:
           type: object
-          properties:
-            start:
-              type: integer
-              format: int64
-            end:
-              type: integer
-              format: int64
+          description: Merge policy configuration
+        resources:
+          type: object
+          description: Resource limits for indexing
     IndexDescription:
       type: object
       properties:
@@ -332,131 +311,6 @@ components:
         max_timestamp:
           type: integer
           format: int64
-    IndexingSettings:
-      type: object
-      properties:
-        commit_timeout_secs:
-          type: integer
-          description: Maximum time before committing a split (seconds)
-        split_num_docs_target:
-          type: integer
-          description: Target number of docs per split
-        merge_policy:
-          type: object
-          description: Merge policy configuration
-        resources:
-          type: object
-          description: Resource limits for indexing
-    DocMapping:
-      type: object
-      properties:
-        field_mappings:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              type:
-                type: string
-                enum:
-                - text
-                - u64
-                - i64
-                - f64
-                - bool
-                - datetime
-                - json
-                - bytes
-                - ip
-              fast:
-                type: boolean
-              indexed:
-                type: boolean
-              stored:
-                type: boolean
-        timestamp_field:
-          type: string
-          description: Field used as the document timestamp
-        tag_fields:
-          type: array
-          items:
-            type: string
-        store_source:
-          type: boolean
-          description: Whether to store the original source document
-        dynamic_mapping:
-          type: object
-          description: Configuration for dynamic field mapping
-    SplitList:
-      type: object
-      properties:
-        offset:
-          type: integer
-        size:
-          type: integer
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/SplitMetadata'
-    IndexMetadata:
-      type: object
-      properties:
-        version:
-          type: string
-        index_uid:
-          type: string
-          description: Unique index ID including generation
-        index_config:
-          $ref: '#/components/schemas/IndexConfig'
-        checkpoint:
-          type: object
-          description: Current indexing checkpoint per source
-        create_timestamp:
-          type: integer
-          format: int64
-          description: Unix timestamp when the index was created
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceConfig'
-    IndexConfig:
-      type: object
-      required:
-      - version
-      - index_id
-      - doc_mapping
-      properties:
-        version:
-          type: string
-          description: Configuration format version
-          example: '0.8'
-        index_id:
-          type: string
-          description: Unique index identifier
-          example: my-log-index
-        index_uri:
-          type: string
-          description: Storage URI (defaults to configured storage)
-          example: s3://my-bucket/my-index
-        doc_mapping:
-          $ref: '#/components/schemas/DocMapping'
-        indexing_settings:
-          $ref: '#/components/schemas/IndexingSettings'
-        search_settings:
-          $ref: '#/components/schemas/SearchSettings'
-        retention:
-          $ref: '#/components/schemas/RetentionPolicy'
-    ApiError:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-      example:
-        message: Index 'my-index' not found
     SourceConfig:
       type: object
       required:
@@ -503,6 +357,82 @@ components:
           type: object
           description: Source-specific parameters
           additionalProperties: true
+    DocMapping:
+      type: object
+      properties:
+        field_mappings:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+                enum:
+                - text
+                - u64
+                - i64
+                - f64
+                - bool
+                - datetime
+                - json
+                - bytes
+                - ip
+              fast:
+                type: boolean
+              indexed:
+                type: boolean
+              stored:
+                type: boolean
+        timestamp_field:
+          type: string
+          description: Field used as the document timestamp
+        tag_fields:
+          type: array
+          items:
+            type: string
+        store_source:
+          type: boolean
+          description: Whether to store the original source document
+        dynamic_mapping:
+          type: object
+          description: Configuration for dynamic field mapping
+    SearchSettings:
+      type: object
+      properties:
+        default_search_fields:
+          type: array
+          items:
+            type: string
+          description: Fields searched when no field is specified in the query
+    IndexConfig:
+      type: object
+      required:
+      - version
+      - index_id
+      - doc_mapping
+      properties:
+        version:
+          type: string
+          description: Configuration format version
+          example: '0.8'
+        index_id:
+          type: string
+          description: Unique index identifier
+          example: my-log-index
+        index_uri:
+          type: string
+          description: Storage URI (defaults to configured storage)
+          example: s3://my-bucket/my-index
+        doc_mapping:
+          $ref: '#/components/schemas/DocMapping'
+        indexing_settings:
+          $ref: '#/components/schemas/IndexingSettings'
+        search_settings:
+          $ref: '#/components/schemas/SearchSettings'
+        retention:
+          $ref: '#/components/schemas/RetentionPolicy'
     RetentionPolicy:
       type: object
       properties:
@@ -512,6 +442,76 @@ components:
         schedule:
           type: string
           description: Cron schedule for retention enforcement
+    IndexMetadata:
+      type: object
+      properties:
+        version:
+          type: string
+        index_uid:
+          type: string
+          description: Unique index ID including generation
+        index_config:
+          $ref: '#/components/schemas/IndexConfig'
+        checkpoint:
+          type: object
+          description: Current indexing checkpoint per source
+        create_timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp when the index was created
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceConfig'
+    SplitMetadata:
+      type: object
+      properties:
+        split_id:
+          type: string
+        index_uid:
+          type: string
+        split_state:
+          type: string
+          enum:
+          - Staged
+          - Published
+          - MarkedForDeletion
+        num_docs:
+          type: integer
+        size_in_bytes:
+          type: integer
+          format: int64
+        create_timestamp:
+          type: integer
+          format: int64
+        time_range:
+          type: object
+          properties:
+            start:
+              type: integer
+              format: int64
+            end:
+              type: integer
+              format: int64
+  responses:
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   parameters:
     indexId:
       name: index_id

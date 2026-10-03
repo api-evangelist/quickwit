@@ -130,34 +130,40 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    InternalError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   schemas:
-    SearchSettings:
+    IndexTemplate:
       type: object
+      required:
+      - version
+      - template_id
+      - index_id_patterns
       properties:
-        default_search_fields:
+        version:
+          type: string
+          description: Template format version
+        template_id:
+          type: string
+          description: Unique template identifier
+        index_id_patterns:
           type: array
           items:
             type: string
-          description: Fields searched when no field is specified in the query
+          description: Glob patterns matching index IDs this template applies to
+        priority:
+          type: integer
+          description: Priority when multiple templates match (higher wins)
+          default: 0
+        description:
+          type: string
+          description: Human-readable template description
+        doc_mapping:
+          $ref: '#/components/schemas/DocMapping'
+        indexing_settings:
+          $ref: '#/components/schemas/IndexingSettings'
+        search_settings:
+          $ref: '#/components/schemas/SearchSettings'
+        retention:
+          $ref: '#/components/schemas/RetentionPolicy'
     IndexingSettings:
       type: object
       properties:
@@ -173,6 +179,15 @@ components:
         resources:
           type: object
           description: Resource limits for indexing
+    RetentionPolicy:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Retention period (e.g. "90 days")
+        schedule:
+          type: string
+          description: Cron schedule for retention enforcement
     DocMapping:
       type: object
       properties:
@@ -214,39 +229,14 @@ components:
         dynamic_mapping:
           type: object
           description: Configuration for dynamic field mapping
-    IndexTemplate:
+    SearchSettings:
       type: object
-      required:
-      - version
-      - template_id
-      - index_id_patterns
       properties:
-        version:
-          type: string
-          description: Template format version
-        template_id:
-          type: string
-          description: Unique template identifier
-        index_id_patterns:
+        default_search_fields:
           type: array
           items:
             type: string
-          description: Glob patterns matching index IDs this template applies to
-        priority:
-          type: integer
-          description: Priority when multiple templates match (higher wins)
-          default: 0
-        description:
-          type: string
-          description: Human-readable template description
-        doc_mapping:
-          $ref: '#/components/schemas/DocMapping'
-        indexing_settings:
-          $ref: '#/components/schemas/IndexingSettings'
-        search_settings:
-          $ref: '#/components/schemas/SearchSettings'
-        retention:
-          $ref: '#/components/schemas/RetentionPolicy'
+          description: Fields searched when no field is specified in the query
     ApiError:
       type: object
       required:
@@ -257,15 +247,25 @@ components:
           description: Human-readable error message
       example:
         message: Index 'my-index' not found
-    RetentionPolicy:
-      type: object
-      properties:
-        period:
-          type: string
-          description: Retention period (e.g. "90 days")
-        schedule:
-          type: string
-          description: Cron schedule for retention enforcement
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   parameters:
     templateId:
       name: template_id
