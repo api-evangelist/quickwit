@@ -247,70 +247,23 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
-    ApiError:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-      example:
-        message: Index 'my-index' not found
-    SplitList:
+    SearchSettings:
       type: object
       properties:
-        offset:
-          type: integer
-        size:
-          type: integer
-        splits:
+        default_search_fields:
           type: array
           items:
-            $ref: '#/components/schemas/SplitMetadata'
-    IndexingSettings:
+            type: string
+          description: Fields searched when no field is specified in the query
+    RetentionPolicy:
       type: object
       properties:
-        commit_timeout_secs:
-          type: integer
-          description: Maximum time before committing a split (seconds)
-        split_num_docs_target:
-          type: integer
-          description: Target number of docs per split
-        merge_policy:
-          type: object
-          description: Merge policy configuration
-        resources:
-          type: object
-          description: Resource limits for indexing
-    IndexDescription:
-      type: object
-      properties:
-        index_id:
+        period:
           type: string
-        index_uri:
+          description: Retention period (e.g. "90 days")
+        schedule:
           type: string
-        num_published_splits:
-          type: integer
-        size_published_splits:
-          type: integer
-          format: int64
-          description: Size in bytes of published splits
-        num_published_docs:
-          type: integer
-          format: int64
-        size_published_docs_uncompressed:
-          type: integer
-          format: int64
-          description: Uncompressed size in bytes of indexed documents
-        timestamp_field_name:
-          type: string
-        min_timestamp:
-          type: integer
-          format: int64
-        max_timestamp:
-          type: integer
-          format: int64
+          description: Cron schedule for retention enforcement
     SourceConfig:
       type: object
       required:
@@ -357,6 +310,66 @@ components:
           type: object
           description: Source-specific parameters
           additionalProperties: true
+    IndexMetadata:
+      type: object
+      properties:
+        version:
+          type: string
+        index_uid:
+          type: string
+          description: Unique index ID including generation
+        index_config:
+          $ref: '#/components/schemas/IndexConfig'
+        checkpoint:
+          type: object
+          description: Current indexing checkpoint per source
+        create_timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp when the index was created
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceConfig'
+    IndexDescription:
+      type: object
+      properties:
+        index_id:
+          type: string
+        index_uri:
+          type: string
+        num_published_splits:
+          type: integer
+        size_published_splits:
+          type: integer
+          format: int64
+          description: Size in bytes of published splits
+        num_published_docs:
+          type: integer
+          format: int64
+        size_published_docs_uncompressed:
+          type: integer
+          format: int64
+          description: Uncompressed size in bytes of indexed documents
+        timestamp_field_name:
+          type: string
+        min_timestamp:
+          type: integer
+          format: int64
+        max_timestamp:
+          type: integer
+          format: int64
+    SplitList:
+      type: object
+      properties:
+        offset:
+          type: integer
+        size:
+          type: integer
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitMetadata'
     DocMapping:
       type: object
       properties:
@@ -398,14 +411,16 @@ components:
         dynamic_mapping:
           type: object
           description: Configuration for dynamic field mapping
-    SearchSettings:
+    ApiError:
       type: object
+      required:
+      - message
       properties:
-        default_search_fields:
-          type: array
-          items:
-            type: string
-          description: Fields searched when no field is specified in the query
+        message:
+          type: string
+          description: Human-readable error message
+      example:
+        message: Index 'my-index' not found
     IndexConfig:
       type: object
       required:
@@ -433,36 +448,6 @@ components:
           $ref: '#/components/schemas/SearchSettings'
         retention:
           $ref: '#/components/schemas/RetentionPolicy'
-    RetentionPolicy:
-      type: object
-      properties:
-        period:
-          type: string
-          description: Retention period (e.g. "90 days")
-        schedule:
-          type: string
-          description: Cron schedule for retention enforcement
-    IndexMetadata:
-      type: object
-      properties:
-        version:
-          type: string
-        index_uid:
-          type: string
-          description: Unique index ID including generation
-        index_config:
-          $ref: '#/components/schemas/IndexConfig'
-        checkpoint:
-          type: object
-          description: Current indexing checkpoint per source
-        create_timestamp:
-          type: integer
-          format: int64
-          description: Unix timestamp when the index was created
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceConfig'
     SplitMetadata:
       type: object
       properties:
@@ -493,6 +478,21 @@ components:
             end:
               type: integer
               format: int64
+    IndexingSettings:
+      type: object
+      properties:
+        commit_timeout_secs:
+          type: integer
+          description: Maximum time before committing a split (seconds)
+        split_num_docs_target:
+          type: integer
+          description: Target number of docs per split
+        merge_policy:
+          type: object
+          description: Merge policy configuration
+        resources:
+          type: object
+          description: Resource limits for indexing
   responses:
     InternalError:
       description: Internal server error
@@ -500,14 +500,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    BadRequest:
-      description: Bad request - invalid parameters or body
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request - invalid parameters or body
       content:
         application/json:
           schema:

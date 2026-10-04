@@ -76,12 +76,6 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
     NotFound:
       description: Resource not found
       content:
@@ -94,15 +88,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-  parameters:
-    indexId:
-      name: index_id
-      in: path
-      description: The index identifier
-      required: true
-      schema:
-        type: string
-      example: my-index
+    BadRequest:
+      description: Bad request - invalid parameters or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
     ApiError:
       type: object
@@ -136,3 +127,12 @@ components:
               document:
                 type: string
           description: Details of parse failures (only if detailed_response=true)
+  parameters:
+    indexId:
+      name: index_id
+      in: path
+      description: The index identifier
+      required: true
+      schema:
+        type: string
+      example: my-index

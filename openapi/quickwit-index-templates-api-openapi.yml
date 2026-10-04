@@ -131,54 +131,14 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
-    IndexTemplate:
+    SearchSettings:
       type: object
-      required:
-      - version
-      - template_id
-      - index_id_patterns
       properties:
-        version:
-          type: string
-          description: Template format version
-        template_id:
-          type: string
-          description: Unique template identifier
-        index_id_patterns:
+        default_search_fields:
           type: array
           items:
             type: string
-          description: Glob patterns matching index IDs this template applies to
-        priority:
-          type: integer
-          description: Priority when multiple templates match (higher wins)
-          default: 0
-        description:
-          type: string
-          description: Human-readable template description
-        doc_mapping:
-          $ref: '#/components/schemas/DocMapping'
-        indexing_settings:
-          $ref: '#/components/schemas/IndexingSettings'
-        search_settings:
-          $ref: '#/components/schemas/SearchSettings'
-        retention:
-          $ref: '#/components/schemas/RetentionPolicy'
-    IndexingSettings:
-      type: object
-      properties:
-        commit_timeout_secs:
-          type: integer
-          description: Maximum time before committing a split (seconds)
-        split_num_docs_target:
-          type: integer
-          description: Target number of docs per split
-        merge_policy:
-          type: object
-          description: Merge policy configuration
-        resources:
-          type: object
-          description: Resource limits for indexing
+          description: Fields searched when no field is specified in the query
     RetentionPolicy:
       type: object
       properties:
@@ -229,14 +189,6 @@ components:
         dynamic_mapping:
           type: object
           description: Configuration for dynamic field mapping
-    SearchSettings:
-      type: object
-      properties:
-        default_search_fields:
-          type: array
-          items:
-            type: string
-          description: Fields searched when no field is specified in the query
     ApiError:
       type: object
       required:
@@ -247,13 +199,55 @@ components:
           description: Human-readable error message
       example:
         message: Index 'my-index' not found
+    IndexTemplate:
+      type: object
+      required:
+      - version
+      - template_id
+      - index_id_patterns
+      properties:
+        version:
+          type: string
+          description: Template format version
+        template_id:
+          type: string
+          description: Unique template identifier
+        index_id_patterns:
+          type: array
+          items:
+            type: string
+          description: Glob patterns matching index IDs this template applies to
+        priority:
+          type: integer
+          description: Priority when multiple templates match (higher wins)
+          default: 0
+        description:
+          type: string
+          description: Human-readable template description
+        doc_mapping:
+          $ref: '#/components/schemas/DocMapping'
+        indexing_settings:
+          $ref: '#/components/schemas/IndexingSettings'
+        search_settings:
+          $ref: '#/components/schemas/SearchSettings'
+        retention:
+          $ref: '#/components/schemas/RetentionPolicy'
+    IndexingSettings:
+      type: object
+      properties:
+        commit_timeout_secs:
+          type: integer
+          description: Maximum time before committing a split (seconds)
+        split_num_docs_target:
+          type: integer
+          description: Target number of docs per split
+        merge_policy:
+          type: object
+          description: Merge policy configuration
+        resources:
+          type: object
+          description: Resource limits for indexing
   responses:
-    BadRequest:
-      description: Bad request - invalid parameters or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
     NotFound:
       description: Resource not found
       content:
@@ -262,6 +256,12 @@ components:
             $ref: '#/components/schemas/ApiError'
     InternalError:
       description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    BadRequest:
+      description: Bad request - invalid parameters or body
       content:
         application/json:
           schema:
