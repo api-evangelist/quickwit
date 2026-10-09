@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Quickwit Rate Limits
 description: Quickwit is a self-hosted, open-source search engine. There are no externally-enforced SaaS rate limits. Throughput is bounded by the hardware resources of the deployment. The following limits are either hardcoded in the software or configurable by operators.
 url: https://quickwit.io/docs/reference/rest-api
