@@ -1,4 +1,23 @@
 edges:
+- partner_name: OpenSearch
+  partner: opensearch
+  partner_match: shape-anchor
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  shape: opensearch-api
+  type: docs
+  degree: declared-subset
+  evidence: https://quickwit.io/docs/reference/es_compatible_api
+  evidence_kind: own-docs
+  evidence_file: https://github.com/api-evangelist/quickwit/blob/main/evidence/compatibility/quickwit-opensearch-api-1.md
+  quote: In order to facilitate migrations and integrations with existing tools, Quickwit offers an Elasticsearch/Opensearch
+    compatible API. This API is incomplete. This page lists the available features and endpoints.
+  supported_operations: []
+  unsupported_operations: []
+  supported_share: 0.0
+  detected_by: sweep-shape-compat.py
+  first_seen: '2026-10-13'
 - partner_name: Elastic
   partner: elastic
   partner_match: shape-anchor
@@ -20,25 +39,6 @@ edges:
   - _search
   unsupported_operations: []
   supported_share: 0.278
-  detected_by: sweep-shape-compat.py
-  first_seen: '2026-10-13'
-- partner_name: OpenSearch
-  partner: opensearch
-  partner_match: shape-anchor
-  channel: provider-built
-  relationship: compatible
-  direction: provider-built
-  shape: opensearch-api
-  type: docs
-  degree: declared-subset
-  evidence: https://quickwit.io/docs/reference/es_compatible_api
-  evidence_kind: own-docs
-  evidence_file: https://github.com/api-evangelist/quickwit/blob/main/evidence/compatibility/quickwit-opensearch-api-1.md
-  quote: In order to facilitate migrations and integrations with existing tools, Quickwit offers an Elasticsearch/Opensearch
-    compatible API. This API is incomplete. This page lists the available features and endpoints.
-  supported_operations: []
-  unsupported_operations: []
-  supported_share: 0.0
   detected_by: sweep-shape-compat.py
   first_seen: '2026-10-13'
 generated: '2026-10-13'
