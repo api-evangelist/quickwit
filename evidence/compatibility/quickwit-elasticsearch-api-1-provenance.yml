@@ -1,0 +1,12 @@
+fetched: '2026-10-13'
+method: fetched
+source: https://quickwit.io/docs/reference/es_compatible_api
+page: https://quickwit.io/docs/reference/es_compatible_api
+file: quickwit-elasticsearch-api-1.md
+bytes: 25897
+sha256: bc7f8175407b516f222fa241c56673e004bb9f68c06862715efa022698d0a029
+anchor: elastic
+shape: elasticsearch-api
+classification: declares-compatibility
+quote: Elasticsearch compatible API | Quickwit Skip to main content
+note: text extracted from the provider's own page (tags stripped), saved for evidence

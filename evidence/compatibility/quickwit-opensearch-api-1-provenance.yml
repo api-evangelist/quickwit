@@ -1,0 +1,13 @@
+fetched: '2026-10-13'
+method: fetched
+source: https://quickwit.io/docs/reference/es_compatible_api
+page: https://quickwit.io/docs/reference/es_compatible_api
+file: quickwit-opensearch-api-1.md
+bytes: 25897
+sha256: bc7f8175407b516f222fa241c56673e004bb9f68c06862715efa022698d0a029
+anchor: opensearch
+shape: opensearch-api
+classification: declares-compatibility
+quote: In order to facilitate migrations and integrations with existing tools, Quickwit offers an Elasticsearch/Opensearch
+  compatible API. This API is incomplete. This page lists the available features and endpoints.
+note: text extracted from the provider's own page (tags stripped), saved for evidence
